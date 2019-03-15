@@ -49,6 +49,17 @@ class Map extends React.Component {
   }
 
   /**
+   * Вызывается сразу после render.
+   * Не вызывается в момент первого render'а компонента.
+   // * @param {*} props Предыдущие свойства.
+   // * @param {*} state Предыдущее состояние.
+   * @return {undefined}
+   */
+  componentDidUpdate() {
+    this.state.leaflet.invalidateSize();
+  }
+
+  /**
    * Вызывается сразу перед тем, как компонент будет удален из DOM.
    * @return {undefined}
    */
