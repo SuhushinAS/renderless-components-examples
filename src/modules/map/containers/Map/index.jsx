@@ -3,7 +3,7 @@ import React from 'react';
 import './style.css';
 import {MapContext} from 'modules/map/context/index.js';
 
-class Map extends React.Component {
+class Map extends React.PureComponent {
   /**
    * Значения свойств по-умолчанию.
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -46,17 +46,6 @@ class Map extends React.Component {
    */
   componentDidMount() {
     this.setState({leaflet: L.map(this.map)});
-  }
-
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render'а компонента.
-   // * @param {*} props Предыдущие свойства.
-   // * @param {*} state Предыдущее состояние.
-   * @return {undefined}
-   */
-  componentDidUpdate() {
-    this.state.leaflet.invalidateSize();
   }
 
   /**

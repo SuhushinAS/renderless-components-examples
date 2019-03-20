@@ -50,11 +50,11 @@ class Example extends React.Component {
    * Должен ли компонент обновиться?
    * На самом деле, обычно реакт сам отлично разбирается.
    * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
-   * @param {*} nextProps Новые свойства.
-   * @param {*} nextState Новое состояние.
+   * @param {*} props Новые свойства.
+   * @param {*} state Новое состояние.
    * @return {boolean} Должен ли компонент обновиться?
    */
-  // shouldComponentUpdate(nextProps, nextState) {}
+  // shouldComponentUpdate(props, state) {}
 
   /**
    * Вызывается сразу после render.

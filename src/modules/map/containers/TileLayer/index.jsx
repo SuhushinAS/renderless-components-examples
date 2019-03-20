@@ -2,7 +2,7 @@ import L from 'leaflet';
 import withMap from 'modules/map/hoc/withMap/index.jsx';
 import React from 'react';
 
-class TileLayer extends React.Component {
+class TileLayer extends React.PureComponent {
   /**
    * Компонент примонтировался.
    * В данный момент у нас есть возможность использовать refs,
@@ -15,14 +15,6 @@ class TileLayer extends React.Component {
   }
 
   /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
-  componentWillUnmount() {
-    this.tileLayerDelete(this.props);
-  }
-
-  /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render'а компонента.
    * @param {*} props Предыдущие свойства.
@@ -32,6 +24,14 @@ class TileLayer extends React.Component {
   componentDidUpdate(props) {
     this.tileLayerDelete(props);
     this.tileLayerAdd(this.props);
+  }
+
+  /**
+   * Вызывается сразу перед тем, как компонент будет удален из DOM.
+   * @return {undefined}
+   */
+  componentWillUnmount() {
+    this.tileLayerDelete(this.props);
   }
 
   /**

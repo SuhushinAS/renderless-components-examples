@@ -34,6 +34,8 @@ class View extends React.Component {
         return L.geoJSON(view).getBounds();
     }
 
+    isLoad = false;
+
     /**
      * Конструктор компонента.
      * @param {*} props Свойства переданые в компонент.
@@ -48,8 +50,15 @@ class View extends React.Component {
             this.flyTo(view);
         }
 
-        leaflet.off('moveend zoomend', this.handleViewChange).on('moveend zoomend', this.handleViewChange);
+        leaflet.on('moveend zoomend', this.handleViewChange);
+        window.addEventListener('load', this.handleLoad);
     }
+
+    handleLoad = (e) => {
+        this.props.leaflet.invalidateSize();
+        this.flyTo(this.props.view);
+        this.isLoad = true;
+    };
 
     /**
      * Обработать смену положения карты
@@ -58,10 +67,11 @@ class View extends React.Component {
     handleViewChange = () => {
         const {leaflet} = this.props;
 
-        if (this.props.onViewChange) {
+        if (this.props.onViewChange && this.isLoad) {
             const bounds = View.getBoundsClean(leaflet.getBounds());
             const rectangle = L.rectangle(bounds);
-            this.props.onViewChange(rectangle.toGeoJSON());
+            const view = rectangle.toGeoJSON();
+            this.props.onViewChange(view);
         }
     };
 
@@ -110,6 +120,7 @@ class View extends React.Component {
      */
     componentWillUnmount() {
         this.props.leaflet.off('moveend zoomend', this.handleViewChange);
+        window.removeEventListener('load', this.handleLoad);
     }
 }
 
