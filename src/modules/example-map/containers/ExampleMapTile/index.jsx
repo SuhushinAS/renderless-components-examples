@@ -1,15 +1,14 @@
 import TileRadio from 'modules/example-map/components/TileRadio/index.jsx';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
-import view from 'modules/example-map/data/view.json';
 import Map from "modules/map/containers/Map/index.jsx";
 import TileLayer from 'modules/map/containers/TileLayer/index.jsx';
-import View from 'modules/map/containers/View/index.jsx';
+import ViewSimple from 'modules/map/containers/ViewSimple/index.jsx';
 import React from 'react';
 import './style.css';
 
 const tileLayerList = Object.keys(tileLayerData);
 
-class ExampleMap extends React.Component {
+class ExampleMapTile extends React.Component {
   /**
    * Значения свойств по-умолчанию.
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -18,8 +17,6 @@ class ExampleMap extends React.Component {
 
   state = {
     tileId: tileLayerList[0],
-    view,
-    viewEdit: view,
   };
 
   /**
@@ -35,22 +32,12 @@ class ExampleMap extends React.Component {
               <legend>Tile layer</legend>
               {tileLayerList.map(this.renderTileRadio)}
             </fieldset>
-            <fieldset>
-              <legend>View</legend>
-              <textarea cols="31"
-                        id="view"
-                        name="view"
-                        onChange={this.handleViewEdit}
-                        rows="31"
-                        value={JSON.stringify(this.state.viewEdit, undefined, 2)} />
-              <button onClick={this.handleFlyButtonClick}>Fly</button>
-            </fieldset>
           </div>
         </div>
         <div className="example-map__main">
           <Map>
             <TileLayer {...tileLayerData[this.state.tileId].data} />
-            <View onViewChange={this.handleViewChange} view={this.state.view} />
+            <ViewSimple />
           </Map>
         </div>
       </div>
@@ -64,28 +51,6 @@ class ExampleMap extends React.Component {
       tileId
     });
   };
-
-  handleViewChange = (view) => {
-    this.setState({
-      view,
-      viewEdit: view
-    });
-  };
-
-  handleViewEdit = (e) => {
-    this.setState({
-      viewEdit: JSON.parse(e.target.value),
-    });
-  };
-
-  handleFlyButtonClick = () => {
-    this.setState(this.setView);
-  };
-
-  setView = (state) => ({
-    ...state,
-    view: state.viewEdit,
-  });
 }
 
-export default ExampleMap;
+export default ExampleMapTile;

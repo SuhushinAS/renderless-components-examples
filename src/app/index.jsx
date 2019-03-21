@@ -1,36 +1,50 @@
 import history from 'app/browser-history.js';
 import configureStore from 'app/store.js';
-// import Example from 'modules/example/containers/Example/index.jsx';
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Router} from 'react-router-dom';
-import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
+import {Link, Router} from 'react-router-dom';
+import ExampleMapTile from 'modules/example-map/containers/ExampleMapTile/index.jsx';
+import ExampleMapView from 'modules/example-map/containers/ExampleMapView/index.jsx';
 import {Redirect, Route, Switch} from "react-router";
+import './style.css';
 
 const store = configureStore();
 
 const routeData = {
-  'map': {
-    component: ExampleMap,
-    path: '/map',
+  'example-map-tile': {
+    component: ExampleMapTile,
+    path: '/example-map-tile',
+  },
+  'example-map-view': {
+    component: ExampleMapView,
+    path: '/example-map-view',
   },
 };
 
-const routeList = ['map'];
+const routeList = Object.keys(routeData);
 
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <Switch>
-            {routeList.map(this.renderRoute)}
-            <Redirect to={routeData[routeList[0]].path} />
-          </Switch>
+          <div className="app">
+            <div className="app__nav">
+                {routeList.map(this.renderLink)}
+            </div>
+            <div className="app__content">
+              <Switch>
+                {routeList.map(this.renderRoute)}
+                <Redirect to={routeData[routeList[0]].path} />
+              </Switch>
+            </div>
+          </div>
         </Router>
       </Provider>
     );
   }
+
+  renderLink = (routeId) => <Link className="app__nav-link" key={routeId} to={routeData[routeId].path}>{routeData[routeId].component.name}</Link>;
 
   renderRoute = (routeId) => <Route component={routeData[routeId].component} key={routeId} path={routeData[routeId].path} />;
 }

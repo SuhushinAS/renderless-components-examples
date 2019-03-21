@@ -1,0 +1,19 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app__nav {
+
+}
+
+.app__nav-link {
+  display: inline-block;
+  margin: 5px;
+}
+
+.app__content {
+  display: flex;
+  height: 100%;
+}

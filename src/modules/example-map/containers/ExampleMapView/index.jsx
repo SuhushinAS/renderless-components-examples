@@ -1,4 +1,3 @@
-import TileRadio from 'modules/example-map/components/TileRadio/index.jsx';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
 import view from 'modules/example-map/data/view.json';
 import Map from "modules/map/containers/Map/index.jsx";
@@ -7,9 +6,9 @@ import View from 'modules/map/containers/View/index.jsx';
 import React from 'react';
 import './style.css';
 
-const tileLayerList = Object.keys(tileLayerData);
+const tile = tileLayerData[Object.keys(tileLayerData)[0]].data;
 
-class ExampleMap extends React.Component {
+class ExampleMapView extends React.Component {
   /**
    * Значения свойств по-умолчанию.
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -17,7 +16,6 @@ class ExampleMap extends React.Component {
   static defaultProps = {};
 
   state = {
-    tileId: tileLayerList[0],
     view,
     viewEdit: view,
   };
@@ -32,10 +30,6 @@ class ExampleMap extends React.Component {
         <div className="example-map__side">
           <div>
             <fieldset>
-              <legend>Tile layer</legend>
-              {tileLayerList.map(this.renderTileRadio)}
-            </fieldset>
-            <fieldset>
               <legend>View</legend>
               <textarea cols="31"
                         id="view"
@@ -49,21 +43,13 @@ class ExampleMap extends React.Component {
         </div>
         <div className="example-map__main">
           <Map>
-            <TileLayer {...tileLayerData[this.state.tileId].data} />
+            <TileLayer {...tile} />
             <View onViewChange={this.handleViewChange} view={this.state.view} />
           </Map>
         </div>
       </div>
     );
   }
-
-  renderTileRadio = (tileId) => <TileRadio key={tileId} onChange={this.handleTileChange} tileId={tileId} value={this.state.tileId} />;
-
-  handleTileChange = (tileId) => {
-    this.setState({
-      tileId
-    });
-  };
 
   handleViewChange = (view) => {
     this.setState({
@@ -88,4 +74,4 @@ class ExampleMap extends React.Component {
   });
 }
 
-export default ExampleMap;
+export default ExampleMapView;

@@ -10,10 +10,10 @@ export default function withMap(Component) {
     return class ComponentWithLeaflet extends React.Component {
         /**
          * Вывести детей.
-         * @param {number} leaflet Дата.
+         * @param {number} context Контекст.
          * @return {*} Представление.
          */
-        renderComponent = (leaflet) => <Component {...this.props} leaflet={leaflet} />;
+        renderComponent = (context) => <Component {...this.props} {...context} />;
 
         /**
          * Отображение компонента

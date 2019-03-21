@@ -11,7 +11,22 @@ class Map extends React.PureComponent {
   static defaultProps = {};
 
   state = {
+    isLoad: false,
     leaflet: undefined,
+  };
+
+  /**
+   * Конструктор компонента.
+   * @param {*} props Свойства переданые в компонент.
+   * @return {undefined}
+   */
+  constructor(props) {
+    super(props);
+    window.addEventListener('load', this.handleLoad);
+  }
+
+  handleLoad = () => {
+    this.setState({isLoad: true});
   };
 
   /**
@@ -30,7 +45,7 @@ class Map extends React.PureComponent {
   render() {
     return (
       <div className="map" ref={this.refMap}>
-        <MapContext.Provider value={this.state.leaflet}>
+        <MapContext.Provider value={this.state}>
           {this.state.leaflet && this.props.children}
         </MapContext.Provider>
       </div>
@@ -55,6 +70,7 @@ class Map extends React.PureComponent {
   componentWillUnmount() {
     this.state.leaflet.remove();
     this.setState({leaflet: undefined});
+    window.removeEventListener('load', this.handleLoad);
   }
 }
 
