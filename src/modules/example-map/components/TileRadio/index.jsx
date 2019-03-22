@@ -16,52 +16,18 @@ class TileRadio extends React.Component {
    * @return {*} Представление.
    */
   render() {
-    const {tileId, value} = this.props;
+    const {id, value} = this.props;
     return (
-      <label className="tile-radio" htmlFor={tileId}>
-        <input id={tileId} name="tile" onChange={this.handleChange} checked={value === tileId} type="radio" />
-        {tileLayerData[tileId].name}
+      <label className="tile-radio" htmlFor={id}>
+        <input id={id} name="tile" onChange={this.handleChange} checked={value === id} type="radio" />
+        {tileLayerData[id].name}
       </label>
     );
   }
 
   handleChange = () => {
-    this.props.onChange(this.props.tileId);
+    this.props.onChange(this.props.id);
   };
-
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
-   */
-  // componentDidMount() {}
-
-  /**
-   * Должен ли компонент обновиться?
-   * На самом деле, обычно реакт сам отлично разбирается.
-   * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
-   * @param {*} nextProps Новые свойства.
-   * @param {*} nextState Новое состояние.
-   * @return {boolean} Должен ли компонент обновиться?
-   */
-  // shouldComponentUpdate(nextProps, nextState) {}
-
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render'а компонента.
-   * @param {*} props Предыдущие свойства.
-   * @param {*} state Предыдущее состояние.
-   * @return {undefined}
-   */
-  // componentDidUpdate(props, state) {}
-
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
-  // componentWillUnmount() {}
 }
 
 export default TileRadio;

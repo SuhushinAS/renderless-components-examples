@@ -3,6 +3,7 @@ import configureStore from 'app/store.js';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Link, Router} from 'react-router-dom';
+import ExampleMapGeoJSON from 'modules/example-map/containers/ExampleMapGeoJSON/index.jsx';
 import ExampleMapTile from 'modules/example-map/containers/ExampleMapTile/index.jsx';
 import ExampleMapView from 'modules/example-map/containers/ExampleMapView/index.jsx';
 import {Redirect, Route, Switch} from "react-router";
@@ -18,6 +19,10 @@ const routeData = {
   'example-map-view': {
     component: ExampleMapView,
     path: '/example-map-view',
+  },
+  'example-map-geojson': {
+    component: ExampleMapGeoJSON,
+    path: '/example-map-geojson',
   },
 };
 

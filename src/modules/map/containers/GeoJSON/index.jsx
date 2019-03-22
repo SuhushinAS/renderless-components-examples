@@ -2,7 +2,7 @@ import L from 'leaflet';
 import withMap from 'modules/map/hoc/withMap/index.jsx';
 import React from 'react';
 
-class TileLayer extends React.PureComponent {
+class GeoJSON extends React.PureComponent {
   /**
    * Компонент примонтировался.
    * В данный момент у нас есть возможность использовать refs,
@@ -39,12 +39,9 @@ class TileLayer extends React.PureComponent {
    * @return {undefined}
    */
   layerAdd(props) {
-    const {leaflet, params, url} = props;
-
-    if (leaflet) {
-      this.layer = new L.TileLayer(url, params);
-      leaflet.addLayer(this.layer);
-    }
+    const {geojson, leaflet} = props;
+    this.layer = L.GeoJSON.geometryToLayer(geojson);
+    leaflet.addLayer(this.layer);
   }
 
   /**
@@ -68,4 +65,4 @@ class TileLayer extends React.PureComponent {
   }
 }
 
-export default withMap(TileLayer);
+export default withMap(GeoJSON);

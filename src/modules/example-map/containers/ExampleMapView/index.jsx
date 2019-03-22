@@ -4,6 +4,7 @@ import Map from "modules/map/containers/Map/index.jsx";
 import TileLayer from 'modules/map/containers/TileLayer/index.jsx';
 import View from 'modules/map/containers/View/index.jsx';
 import React from 'react';
+import ViewItem from 'modules/example-map/components/ViewItem/index.jsx';
 import './style.css';
 
 const tile = tileLayerData[Object.keys(tileLayerData)[0]].data;
@@ -17,7 +18,7 @@ class ExampleMapView extends React.Component {
 
   state = {
     view,
-    viewEdit: view,
+    viewList: [],
   };
 
   /**
@@ -28,50 +29,58 @@ class ExampleMapView extends React.Component {
     return (
       <div className="example-map">
         <div className="example-map__side">
-          <div>
-            <fieldset>
-              <legend>View</legend>
-              <textarea cols="31"
-                        id="view"
-                        name="view"
-                        onChange={this.handleViewEdit}
-                        rows="31"
-                        value={JSON.stringify(this.state.viewEdit, undefined, 2)} />
-              <button onClick={this.handleFlyButtonClick}>Fly</button>
-            </fieldset>
-          </div>
+          <fieldset>
+            <legend>View</legend>
+            <textarea cols="31"
+                      disabled
+                      id="view"
+                      name="view"
+                      rows="31"
+                      value={JSON.stringify(this.state.view, undefined, 2)} />
+            <button onClick={this.handleSave} type="submit">Save</button>
+          </fieldset>
+          <fieldset>
+            <legend>ViewList</legend>
+            {this.state.viewList.map(this.renderViewList)}
+          </fieldset>
         </div>
         <div className="example-map__main">
           <Map>
             <TileLayer {...tile} />
-            <View onViewChange={this.handleViewChange} view={this.state.view} />
+            <View onViewChange={this.handleViewSet} view={this.state.view} />
           </Map>
         </div>
       </div>
     );
   }
 
-  handleViewChange = (view) => {
-    this.setState({
-      view,
-      viewEdit: view
-    });
+  renderViewList = (view, id) => {
+    return (
+      <ViewItem id={id} key={id} onDelete={this.handleViewDelete} onSet={this.handleViewSet} view={view} />
+    );
   };
 
-  handleViewEdit = (e) => {
-    this.setState({
-      viewEdit: JSON.parse(e.target.value),
-    });
+  handleViewDelete = (deleteId) => {
+    this.setState((state) => ({
+      ...state,
+      viewList: state.viewList.filter((_, id) => deleteId !== id),
+    }));
   };
 
-  handleFlyButtonClick = () => {
-    this.setState(this.setView);
+  handleViewSet = (view) => {
+    this.setState({view});
   };
 
-  setView = (state) => ({
-    ...state,
-    view: state.viewEdit,
-  });
+  handleSave = (e) => {
+    e.preventDefault();
+    this.setState((state) => ({
+      ...state,
+      viewList: [
+        ...state.viewList,
+        state.view,
+      ],
+    }));
+  };
 }
 
 export default ExampleMapView;

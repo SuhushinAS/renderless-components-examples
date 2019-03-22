@@ -44,7 +44,7 @@ class ExampleMapTile extends React.Component {
     );
   }
 
-  renderTileRadio = (tileId) => <TileRadio key={tileId} onChange={this.handleTileChange} tileId={tileId} value={this.state.tileId} />;
+  renderTileRadio = (id) => <TileRadio key={id} onChange={this.handleTileChange} id={id} value={this.state.tileId} />;
 
   handleTileChange = (tileId) => {
     this.setState({
