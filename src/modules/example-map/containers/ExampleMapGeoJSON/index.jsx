@@ -28,7 +28,6 @@ class ExampleMapGeoJSON extends React.Component {
    */
   render() {
     const geoJSONList = geoJSONIdList.filter(this.filterGeoJSON).map(this.getGeoJSON);
-    console.log(geoJSONList);
     return (
       <div className="example-map">
         <div className="example-map__side">

@@ -86,8 +86,7 @@ class Map extends React.PureComponent {
 
   handleClick = (e) => {
     const geoJSON = L.marker(e.latlng).toGeoJSON();
-    prompt('', JSON.stringify(geoJSON));
-    // console.dir(geoJSON);
+    console.log(JSON.stringify(geoJSON));
   };
 }
 
