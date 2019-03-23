@@ -3,6 +3,14 @@ import React from 'react';
 import './style.css';
 import {MapContext} from 'modules/map/context/index.js';
 
+// Фикс иконок на картах
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
+
 class Map extends React.PureComponent {
   /**
    * Значения свойств по-умолчанию.
@@ -60,7 +68,9 @@ class Map extends React.PureComponent {
    * @return {undefined}
    */
   componentDidMount() {
-    this.setState({leaflet: L.map(this.map)});
+    const leaflet = L.map(this.map);
+    this.setState({leaflet});
+    leaflet.on('click', this.handleClick)
   }
 
   /**
@@ -68,10 +78,17 @@ class Map extends React.PureComponent {
    * @return {undefined}
    */
   componentWillUnmount() {
+    this.state.leaflet.off('click', this.handleClick);
     this.state.leaflet.remove();
     this.setState({leaflet: undefined});
     window.removeEventListener('load', this.handleLoad);
   }
+
+  handleClick = (e) => {
+    const geoJSON = L.marker(e.latlng).toGeoJSON();
+    prompt('', JSON.stringify(geoJSON));
+    // console.dir(geoJSON);
+  };
 }
 
 export default Map;

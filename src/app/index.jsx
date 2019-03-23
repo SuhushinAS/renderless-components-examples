@@ -20,9 +20,9 @@ const routeData = {
     component: ExampleMapView,
     path: '/example-map-view',
   },
-  'example-map-geojson': {
+  'example-map-geo-json': {
     component: ExampleMapGeoJSON,
-    path: '/example-map-geojson',
+    path: '/example-map-geo-json',
   },
 };
 

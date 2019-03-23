@@ -1,0 +1,24 @@
+{
+  "DevPro": {
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        444.950393,
+        56.485355
+      ]
+    }
+  },
+  "Userstory": {
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        444.972891,
+        56.458646
+      ]
+    }
+  }
+}

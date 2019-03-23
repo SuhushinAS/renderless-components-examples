@@ -1,14 +1,14 @@
-import tileLayerData from "modules/example-map/data/tile-layer.json";
 import React from 'react';
 import './style.css';
 
-class TileRadio extends React.Component {
+class TileLayerItem extends React.Component {
   /**
    * Значения свойств по-умолчанию.
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
    */
   static defaultProps = {
-    onChange: () => {},
+    onChange: () => {
+    },
   };
 
   /**
@@ -20,7 +20,7 @@ class TileRadio extends React.Component {
     return (
       <label className="tile-radio" htmlFor={id}>
         <input id={id} name="tile" onChange={this.handleChange} checked={value === id} type="radio" />
-        {tileLayerData[id].name}
+        {id}
       </label>
     );
   }
@@ -30,4 +30,4 @@ class TileRadio extends React.Component {
   };
 }
 
-export default TileRadio;
+export default TileLayerItem;

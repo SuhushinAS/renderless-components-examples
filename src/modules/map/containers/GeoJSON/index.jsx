@@ -39,8 +39,8 @@ class GeoJSON extends React.PureComponent {
    * @return {undefined}
    */
   layerAdd(props) {
-    const {geojson, leaflet} = props;
-    this.layer = L.GeoJSON.geometryToLayer(geojson);
+    const {geoJSON, leaflet} = props;
+    this.layer = L.GeoJSON.geometryToLayer(geoJSON);
     leaflet.addLayer(this.layer);
   }
 

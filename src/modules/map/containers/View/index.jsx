@@ -47,12 +47,20 @@ class View extends React.Component {
     return L.geoJSON(view).getBounds();
   }
 
+  bounds;
+
+  /**
+   * Перейти к виду
+   * @return {undefined}
+   */
   fly() {
     const {leaflet, view} = this.props;
-    leaflet.fitWorld({padding: [0, 0]});
-
-    if (view) {
-      this.flyTo(view);
+    const layer = L.geoJSON(view);
+    const bounds = layer.getBounds();
+    if (bounds.isValid()) {
+      leaflet.fitBounds(bounds);
+    } else {
+      leaflet.fitWorld({padding: [0, 0]});
     }
   }
 
@@ -61,27 +69,15 @@ class View extends React.Component {
    * @return {undefined}
    */
   handleViewChange = () => {
-    const {leaflet} = this.props;
+    const {leaflet, onViewChange} = this.props;
 
-    if (this.props.onViewChange) {
+    if (onViewChange) {
       const bounds = View.getBoundsClean(leaflet.getBounds());
       const rectangle = L.rectangle(bounds);
       const view = rectangle.toGeoJSON();
-      this.props.onViewChange(view);
+      onViewChange(view);
     }
   };
-
-  /**
-   * Перейти к виду
-   * @param {*} view Вид.
-   * @return {undefined}
-   */
-  flyTo(view) {
-    const {leaflet} = this.props;
-    const layer = L.geoJSON(view);
-    const bounds = layer.getBounds();
-    leaflet.fitBounds(bounds);
-  }
 
   /**
    * Отображение компонента
@@ -105,11 +101,11 @@ class View extends React.Component {
       this.fly();
     }
 
-    if (view && view !== props.view) {
+    if (view !== props.view) {
       const bounds = View.getBounds(view);
-
-      if (!bounds.equals(View.getBounds(props.view))) {
-        this.flyTo(view);
+      if (bounds.isValid() && !bounds.equals(this.bounds)) {
+        this.bounds = bounds;
+        this.fly();
       }
     }
   }

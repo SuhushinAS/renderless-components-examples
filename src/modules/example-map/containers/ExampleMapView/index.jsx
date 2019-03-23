@@ -7,7 +7,7 @@ import React from 'react';
 import ViewItem from 'modules/example-map/components/ViewItem/index.jsx';
 import './style.css';
 
-const tile = tileLayerData[Object.keys(tileLayerData)[0]].data;
+const tile = tileLayerData.OpenStreetMap;
 
 class ExampleMapView extends React.Component {
   /**

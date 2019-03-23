@@ -1,15 +1,15 @@
-import geojsonData from 'modules/example-map/data/geojson.json';
+import GeoJSONItem from "modules/example-map/components/GeoJSONItem/index.jsx";
+import geoJSONData from 'modules/example-map/data/geo-json.json';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
-import view from 'modules/example-map/data/view.json';
+import GeoJSON from 'modules/map/containers/GeoJSON/index.jsx';
 import Map from "modules/map/containers/Map/index.jsx";
 import TileLayer from 'modules/map/containers/TileLayer/index.jsx';
-import GeoJSON from 'modules/map/containers/GeoJSON/index.jsx';
 import View from 'modules/map/containers/View/index.jsx';
 import React from 'react';
 import './style.css';
 
-const geojson = geojsonData[Object.keys(geojsonData)[0]].data;
-const tile = tileLayerData[Object.keys(tileLayerData)[0]].data;
+const geoJSONIdList = Object.keys(geoJSONData);
+const tile = tileLayerData.OpenStreetMap;
 
 class ExampleMapGeoJSON extends React.Component {
   /**
@@ -19,8 +19,7 @@ class ExampleMapGeoJSON extends React.Component {
   static defaultProps = {};
 
   state = {
-    geojson,
-    geojsonEdit: geojson,
+    showData: {DevPro: true},
   };
 
   /**
@@ -28,51 +27,46 @@ class ExampleMapGeoJSON extends React.Component {
    * @return {*} Представление.
    */
   render() {
+    const geoJSONList = geoJSONIdList.filter(this.filterGeoJSON).map(this.getGeoJSON);
+    console.log(geoJSONList);
     return (
       <div className="example-map">
         <div className="example-map__side">
           <div>
-            <form onSubmit={this.handlePaint}>
-              <fieldset>
-                <legend>GeoJSON</legend>
-                <textarea cols="31"
-                          id="view"
-                          name="view"
-                          onChange={this.handleGeojsonEdit}
-                          rows="31"
-                          value={JSON.stringify(this.state.geojsonEdit, undefined, 2)} />
-                <button type="submit">Paint</button>
-              </fieldset>
-            </form>
+            <fieldset>
+              <legend>GeoJSON</legend>
+              {geoJSONIdList.map(this.renderGeoJSONItem)}
+            </fieldset>
           </div>
         </div>
         <div className="example-map__main">
           <Map>
             <TileLayer {...tile} />
-            <View view={view} />
-            <GeoJSON geojson={this.state.geojson} />
+            <View view={geoJSONList} />
+            {geoJSONList.map(this.renderGeoJSON)}
           </Map>
         </div>
       </div>
     );
   }
 
-  handleGeojsonEdit = (e) => {
-    console.log(e.target.value);
-    this.setState({
-      geojsonEdit: JSON.parse(e.target.value),
-    });
-  };
+  filterGeoJSON = (id) => this.state.showData[id];
 
-  handlePaint = (e) => {
-    e.preventDefault();
-    this.setState(this.setGeoJSON);
-  };
+  getGeoJSON = (id) => geoJSONData[id];
 
-  setGeoJSON = (state) => ({
-    ...state,
-    geojson: state.geojsonEdit,
-  });
+  renderGeoJSONItem = (id) => <GeoJSONItem key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />;
+
+  renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
+
+  handleGeoJSONChange = (id) => {
+    this.setState((state) => ({
+      ...state,
+      showData: {
+        ...state.showData,
+        [id]: !state.showData[id],
+      },
+    }));
+  };
 }
 
 export default ExampleMapGeoJSON;
