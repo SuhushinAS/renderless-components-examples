@@ -7,20 +7,20 @@ import React from 'react';
  * @return {*} Компонент.
  */
 export default function withMap(Component) {
-    return class ComponentWithLeaflet extends React.Component {
-        /**
-         * Вывести детей.
-         * @param {number} context Контекст.
-         * @return {*} Представление.
-         */
-        renderComponent = (context) => <Component {...this.props} {...context} />;
+  return class ComponentWithLeaflet extends React.Component {
+    /**
+     * Вывести детей.
+     * @param {number} context Контекст.
+     * @return {*} Представление.
+     */
+    renderComponent = (context) => <Component {...this.props} {...context} />;
 
-        /**
-         * Отображение компонента
-         * @return {*} Представление компонента.
-         */
-        render() {
-            return <MapContext.Consumer>{this.renderComponent}</MapContext.Consumer>;
-        }
-    };
+    /**
+     * Отображение компонента
+     * @return {*} Представление компонента.
+     */
+    render() {
+      return <MapContext.Consumer>{this.renderComponent}</MapContext.Consumer>;
+    }
+  };
 }

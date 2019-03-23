@@ -3,6 +3,8 @@ import withMap from "modules/map/hoc/withMap/index.jsx";
 import React from 'react';
 
 class View extends React.Component {
+  bounds;
+
   /**
    * Конструктор компонента.
    * @param {*} props Свойства переданые в компонент.
@@ -46,8 +48,6 @@ class View extends React.Component {
   static getBounds(view) {
     return L.geoJSON(view).getBounds();
   }
-
-  bounds;
 
   /**
    * Перейти к виду

@@ -1,12 +1,12 @@
 import history from 'app/browser-history.js';
 import configureStore from 'app/store.js';
-import React from 'react';
-import {Provider} from 'react-redux';
-import {Link, Router} from 'react-router-dom';
 import ExampleMapGeoJSON from 'modules/example-map/containers/ExampleMapGeoJSON/index.jsx';
 import ExampleMapTile from 'modules/example-map/containers/ExampleMapTile/index.jsx';
 import ExampleMapView from 'modules/example-map/containers/ExampleMapView/index.jsx';
+import React from 'react';
+import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from "react-router";
+import {Link, Router} from 'react-router-dom';
 import './style.css';
 
 const store = configureStore();

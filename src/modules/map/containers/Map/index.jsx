@@ -1,7 +1,7 @@
 import L from 'leaflet';
+import {MapContext} from 'modules/map/context/index.js';
 import React from 'react';
 import './style.css';
-import {MapContext} from 'modules/map/context/index.js';
 
 // Фикс иконок на картах
 delete L.Icon.Default.prototype._getIconUrl;

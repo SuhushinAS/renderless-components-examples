@@ -1,10 +1,10 @@
+import ViewItem from 'modules/example-map/components/ViewItem/index.jsx';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
 import view from 'modules/example-map/data/view.json';
 import Map from "modules/map/containers/Map/index.jsx";
 import TileLayer from 'modules/map/containers/TileLayer/index.jsx';
 import View from 'modules/map/containers/View/index.jsx';
 import React from 'react';
-import ViewItem from 'modules/example-map/components/ViewItem/index.jsx';
 import './style.css';
 
 const tile = tileLayerData.OpenStreetMap;
