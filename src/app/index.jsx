@@ -1,5 +1,6 @@
 import history from 'app/browser-history.js';
 import configureStore from 'app/store.js';
+import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
 import ExampleMapGeoJSON from 'modules/example-map/containers/ExampleMapGeoJSON/index.jsx';
 import ExampleMapTile from 'modules/example-map/containers/ExampleMapTile/index.jsx';
 import ExampleMapView from 'modules/example-map/containers/ExampleMapView/index.jsx';
@@ -23,6 +24,10 @@ const routeData = {
   'example-map-geo-json': {
     component: ExampleMapGeoJSON,
     path: '/example-map-geo-json',
+  },
+  'example-map': {
+    component: ExampleMap,
+    path: '/example-map',
   },
 };
 
