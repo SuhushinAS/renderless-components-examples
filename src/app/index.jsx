@@ -1,9 +1,6 @@
 import history from 'app/browser-history.js';
 import configureStore from 'app/store.js';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
-import ExampleMapGeoJSON from 'modules/example-map/containers/ExampleMapGeoJSON/index.jsx';
-import ExampleMapTile from 'modules/example-map/containers/ExampleMapTile/index.jsx';
-import ExampleMapView from 'modules/example-map/containers/ExampleMapView/index.jsx';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from "react-router";
@@ -13,18 +10,6 @@ import './style.css';
 const store = configureStore();
 
 const routeData = {
-  'example-map-tile': {
-    component: ExampleMapTile,
-    path: '/example-map-tile',
-  },
-  'example-map-view': {
-    component: ExampleMapView,
-    path: '/example-map-view',
-  },
-  'example-map-geo-json': {
-    component: ExampleMapGeoJSON,
-    path: '/example-map-geo-json',
-  },
   'example-map': {
     component: ExampleMap,
     path: '/example-map',
