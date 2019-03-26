@@ -1,5 +1,5 @@
 .key {
-  background: lightgreen;
+  background: transparent;
   border: 1px solid lightgray;
   display: inline-block;
   margin: 0.5em;
@@ -9,5 +9,5 @@
 
 .key_active {
   transition: none;
-  background: lightcoral;
+  background: lightgreen;
 }
