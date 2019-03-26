@@ -1,9 +1,9 @@
-.example-map {
+.layout {
   display: flex;
   height: 100%;
   width: 100%;
 }
 
-.example-map__main {
+.layout__main {
   width: 100%;
 }

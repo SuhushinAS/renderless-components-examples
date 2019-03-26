@@ -1,0 +1,18 @@
+{
+  "Alt": 18,
+  "Backspace": 8,
+  "Control": 17,
+  "Delete": 46,
+  "Down": 40,
+  "End": 35,
+  "Enter": 13,
+  "Esc": 27,
+  "Home": 36,
+  "Insert": 45,
+  "Left": 37,
+  "PageDown": 34,
+  "PageUp": 33,
+  "Right": 39,
+  "Shift": 16,
+  "Up": 38
+}

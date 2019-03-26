@@ -1,3 +1,4 @@
+import Layout from 'modules/common/containers/Layout/index.jsx';
 import GeoJSONItem from "modules/example-map/components/GeoJSONItem/index.jsx";
 import TileLayerItem from 'modules/example-map/components/TileLayerItem/index.jsx';
 import geoJSONData from 'modules/example-map/data/geo-json.json';
@@ -7,8 +8,6 @@ import Map from "modules/map/containers/Map/index.jsx";
 import TileLayer from 'modules/map/containers/TileLayer/index.jsx';
 import View from 'modules/map/containers/View/index.jsx';
 import React from 'react';
-// import view from 'modules/example-map/data/view.json';
-import './style.css';
 
 const geoJSONIdList = Object.keys(geoJSONData);
 const tileLayerIdList = Object.keys(tileLayerData);
@@ -31,36 +30,43 @@ class ExampleMap extends React.Component {
    * @return {*} Представление.
    */
   render() {
+    return (
+      <Layout main={this.renderMain()} side={this.renderSide()} />
+    );
+  }
+
+  renderMain() {
     const geoJSONList = geoJSONIdList.filter(this.filterGeoJSON).map(this.getGeoJSON);
     return (
-      <div className="example-map">
-        <div className="example-map__side">
-          <fieldset>
-            <legend>Tile layer</legend>
-            {tileLayerIdList.map(this.renderTileLayer)}
-          </fieldset>
-          <fieldset>
-            <legend>View</legend>
-            <textarea cols="31"
-                      disabled
-                      id="view"
-                      name="view"
-                      rows="31"
-                      value={JSON.stringify(this.state.view, undefined, 2)} />
-          </fieldset>
-          <fieldset>
-            <legend>GeoJSON</legend>
-            {geoJSONIdList.map(this.renderGeoJSONItem)}
-          </fieldset>
-        </div>
-        <div className="example-map__main">
-          <Map>
-            <TileLayer {...tileLayerData[this.state.tileLayerId]} />
-            <View onViewChange={this.handleViewChange} view={geoJSONList} />
-            {geoJSONList.map(this.renderGeoJSON)}
-          </Map>
-        </div>
-      </div>
+      <Map>
+        <TileLayer {...tileLayerData[this.state.tileLayerId]} />
+        <View onViewChange={this.handleViewChange} view={geoJSONList} />
+        {geoJSONList.map(this.renderGeoJSON)}
+      </Map>
+    );
+  }
+
+  renderSide() {
+    return (
+      <React.Fragment>
+        <fieldset>
+          <legend>Tile layer</legend>
+          {tileLayerIdList.map(this.renderTileLayer)}
+        </fieldset>
+        <fieldset>
+          <legend>View</legend>
+          <textarea cols="31"
+                    disabled
+                    id="view"
+                    name="view"
+                    rows="31"
+                    value={JSON.stringify(this.state.view, undefined, 2)} />
+        </fieldset>
+        <fieldset>
+          <legend>GeoJSON</legend>
+          {geoJSONIdList.map(this.renderGeoJSONItem)}
+        </fieldset>
+      </React.Fragment>
     );
   }
 

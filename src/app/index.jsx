@@ -1,5 +1,6 @@
 import history from 'app/browser-history.js';
 import configureStore from 'app/store.js';
+import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
 import React from 'react';
 import {Provider} from 'react-redux';
@@ -10,6 +11,10 @@ import './style.css';
 const store = configureStore();
 
 const routeData = {
+  'example-key': {
+    component: ExampleKey,
+    path: '/example-key',
+  },
   'example-map': {
     component: ExampleMap,
     path: '/example-map',

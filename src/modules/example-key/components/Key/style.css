@@ -1,0 +1,13 @@
+.key {
+  background: lightgreen;
+  border: 1px solid lightgray;
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0.5em;
+  transition: all 300ms ease;
+}
+
+.key_active {
+  transition: none;
+  background: lightcoral;
+}
