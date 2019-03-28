@@ -1,4 +1,4 @@
-import history from 'app/browser-history.js';
+import history from 'app/history.js';
 import configureStore from 'app/store.js';
 import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
@@ -13,10 +13,12 @@ const store = configureStore();
 const routeData = {
   'example-key': {
     component: ExampleKey,
+    name: 'ExampleKey',
     path: '/example-key',
   },
   'example-map': {
     component: ExampleMap,
+    name: 'ExampleMap',
     path: '/example-map',
   },
 };
@@ -44,7 +46,7 @@ class App extends React.Component {
     );
   }
 
-  renderLink = (routeId) => <Link className="app__nav-link" key={routeId} to={routeData[routeId].path}>{routeData[routeId].component.name}</Link>;
+  renderLink = (routeId) => <Link className="app__nav-link" key={routeId} to={routeData[routeId].path}>{routeData[routeId].name}</Link>;
 
   renderRoute = (routeId) => <Route component={routeData[routeId].component} key={routeId} path={routeData[routeId].path} />;
 }
