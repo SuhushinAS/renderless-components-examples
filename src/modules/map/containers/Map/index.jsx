@@ -64,6 +64,7 @@ class Map extends React.PureComponent {
   componentDidMount() {
     const leaflet = L.map(this.map);
     this.setState({leaflet});
+    leaflet.on('click', this.handleClick);
   }
 
   /**
@@ -71,10 +72,16 @@ class Map extends React.PureComponent {
    * @return {undefined}
    */
   componentWillUnmount() {
+    this.state.leaflet.off('click', this.handleClick);
     this.state.leaflet.remove();
     this.setState({leaflet: undefined});
     window.removeEventListener('load', this.handleLoad);
   }
+
+  handleClick = (e) => {
+    const geoJSON = L.marker(e.latlng).toGeoJSON();
+    console.log(JSON.stringify(geoJSON));
+  };
 }
 
 export default Map;

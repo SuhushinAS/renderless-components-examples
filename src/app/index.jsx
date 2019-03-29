@@ -11,15 +11,15 @@ import './style.css';
 const store = configureStore();
 
 const routeData = {
-  'example-key': {
-    component: ExampleKey,
-    name: 'ExampleKey',
-    path: '/example-key',
-  },
   'example-map': {
     component: ExampleMap,
     name: 'ExampleMap',
     path: '/example-map',
+  },
+  'example-key': {
+    component: ExampleKey,
+    name: 'ExampleKey',
+    path: '/example-key',
   },
 };
 

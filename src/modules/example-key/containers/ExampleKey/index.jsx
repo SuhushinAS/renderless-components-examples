@@ -15,8 +15,8 @@ class ExampleKey extends React.Component {
   static defaultProps = {};
 
   state = {
+    keyEvents: {},
     keys: {},
-    keyups: {},
   };
 
   getKeyList() {
@@ -39,8 +39,8 @@ class ExampleKey extends React.Component {
   handleKey = (e) => {
     this.setState((state) => ({
       ...state,
-      keyups: {
-        ...state.keyups,
+      keyEvents: {
+        ...state.keyEvents,
         [e.keyCode]: true,
       },
     }));
@@ -68,7 +68,7 @@ class ExampleKey extends React.Component {
     );
   }
 
-  renderKey = (key) => <Key id={key} isActive={this.state.keyups[keys[key]]} key={key} />;
+  renderKey = (key) => <Key id={key} isActive={this.state.keyEvents[keys[key]]} key={key} />;
 
   renderKeyItem = (key) => <KeyItem id={key} key={key} onChange={this.hendleKeyChange} value={this.state.keys} />;
 
@@ -91,7 +91,7 @@ class ExampleKey extends React.Component {
   }
 
   clearKeyups = () => {
-    this.setState({keyups: {}})
+    this.setState({keyEvents: {}})
   };
 }
 
