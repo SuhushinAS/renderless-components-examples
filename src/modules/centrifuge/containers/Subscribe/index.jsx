@@ -1,66 +1,28 @@
-import Message from 'modules/centrifuge/containers/Message/index.jsx';
-import {centrifugeActionMessagePush} from 'modules/centrifuge/ducks/index.es';
-import centrifuge from 'modules/centrifuge/helpers/Centrifuge/index.es';
-import {centrifugeSelectorConnectionStatus} from 'modules/centrifuge/selectors/index.es';
+import withSocket from "modules/centrifuge/hoc/withSocket/index.jsx";
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 
 class Subscribe extends React.Component {
-    /**
-     * Значения свойств по-умолчанию.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static defaultProps = {
-        additional: '',
-    };
-
-    /**
-     * Получить название канала.
-     * @param {string} additional Дополнительные параметры.
-     * @param {string} channel Канал.
-     * @return {string} Название канала.
-     */
-    static getChannelName({additional, channel}) {
-        const resultList = [channel];
-
-        if (additional) {
-            resultList.push(additional);
-        }
-
-        return resultList.join('_');
-    }
-
-    /**
-     * Конструктор компонента.
-     * @param {*} props Свойства переданые в компонент.
-     * @param {*} context Контекст.
-     * @return {undefined}
-     */
-    constructor(props, context) {
-        super(props, context);
-        this.eventData = {
-            message: this.handleMessage,
-        };
-    }
-
     /**
      * Обработать сообщение.
      * @param {string} channel Канал.
      * @param {*} data Данные.
      * @return {undefined}
      */
-    handleMessage = ({channel, data}) => {
-        this.props.centrifugeActionMessagePush(channel, data, this.props.getId);
+    handleMessage = ({data}) => {
+        this.props.handleMessage(data);
     };
 
-    handleSubscribe = ({recovered}) => {
-        const {onRecoverFail} = this.props;
-
-        if (!recovered && 'function' === typeof onRecoverFail) {
-            onRecoverFail();
-        }
+    eventData = {
+        message: this.handleMessage,
     };
+
+    /**
+     * Отображение компонента
+     * @return {*} Представление компонента.
+     */
+    render() {
+        return null;
+    }
 
     /**
      * Компонент примонтировался.
@@ -74,14 +36,6 @@ class Subscribe extends React.Component {
     }
 
     /**
-     * Вызывается сразу перед тем, как компонент будет удален из DOM.
-     * @return {undefined}
-     */
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-    /**
      * Должен ли компонент обновиться?
      * На самом деле, обычно реакт сам отлично разбирается.
      * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
@@ -90,10 +44,7 @@ class Subscribe extends React.Component {
      * @return {boolean} Должен ли компонент обновиться?
      */
     shouldComponentUpdate(props) {
-        const channel = Subscribe.getChannelName(props);
-        const prevChannel = Subscribe.getChannelName(this.props);
-
-        return channel !== prevChannel || !this.sub;
+        return props.channel !== this.props.channel || !this.subscription;
     }
 
     /**
@@ -113,11 +64,10 @@ class Subscribe extends React.Component {
      * @return {void}
      */
     subscribe() {
-        const channel = Subscribe.getChannelName(this.props);
+        const {centrifuge, channel} = this.props;
 
-        if (centrifuge.isConnected() && !this.sub) {
-            this.sub = centrifuge.subscribe(channel, this.eventData);
-            this.sub.off('subscribe', this.handleSubscribe).on('subscribe', this.handleSubscribe);
+        if (centrifuge.isConnected() && !this.subscription) {
+            this.subscription = centrifuge.subscribe(channel, this.eventData);
         }
     }
 
@@ -126,29 +76,20 @@ class Subscribe extends React.Component {
      * @return {void}
      */
     unsubscribe() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-            this.sub.removeAllListeners();
-            this.sub = null;
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+            this.subscription.removeAllListeners();
+            this.subscription = null;
         }
     }
 
     /**
-     * Отображение компонента
-     * @return {*} Представление компонента.
+     * Вызывается сразу перед тем, как компонент будет удален из DOM.
+     * @return {undefined}
      */
-    render() {
-        return <Message channel={Subscribe.getChannelName(this.props)} handleData={this.props.handleData} />;
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 }
 
-export default compose(
-    connect(
-        (state) => ({
-            centrifugeConnectionStatus: centrifugeSelectorConnectionStatus(state),
-        }),
-        {
-            centrifugeActionMessagePush,
-        }
-    )
-)(Subscribe);
+export default withSocket(Subscribe);

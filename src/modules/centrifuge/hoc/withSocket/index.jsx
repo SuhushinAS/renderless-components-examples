@@ -1,4 +1,4 @@
-import {MapContext} from 'modules/map/context/index.js';
+import {SocketContext} from 'modules/centrifuge/context/index.js';
 import React from 'react';
 
 /**
@@ -6,8 +6,8 @@ import React from 'react';
  * @param {*} Component Компонент.
  * @return {*} Компонент.
  */
-export default function withMap(Component) {
-  return class ComponentWithMap extends React.Component {
+export default function withSocket(Component) {
+  return class ComponentWithSocket extends React.Component {
     /**
      * Вывести детей.
      * @param {number} context Контекст.
@@ -20,7 +20,7 @@ export default function withMap(Component) {
      * @return {*} Представление компонента.
      */
     render() {
-      return <MapContext.Consumer>{this.renderComponent}</MapContext.Consumer>;
+      return <SocketContext.Consumer>{this.renderComponent}</SocketContext.Consumer>;
     }
   };
 }

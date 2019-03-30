@@ -2,6 +2,7 @@ import history from 'app/history.js';
 import configureStore from 'app/store.js';
 import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
+import ExampleSocket from "modules/example-socket/containers/ExampleSocket/index.jsx";
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from "react-router";
@@ -20,6 +21,11 @@ const routeData = {
     component: ExampleKey,
     name: 'ExampleKey',
     path: '/example-key',
+  },
+  'example-socket': {
+    component: ExampleSocket,
+    name: 'ExampleSocket',
+    path: '/example-socket',
   },
 };
 

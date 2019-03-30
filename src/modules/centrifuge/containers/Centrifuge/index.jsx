@@ -1,91 +1,76 @@
-import {centrifugeActionConnectionGet, centrifugeActionConnectionStatusSet} from 'modules/centrifuge/ducks/index.es';
-import centrifuge from 'modules/centrifuge/helpers/Centrifuge/index.es';
-import {centrifugeSelectorConnectData, centrifugeSelectorConnectionStatus} from 'modules/centrifuge/selectors/index.es';
+import CentrifugeJS from 'centrifuge';
+import JsSHA from 'jssha';
+import {SocketContext} from "modules/centrifuge/context/index.js";
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 
 class Centrifuge extends React.Component {
-    /**
-     * Конструктор компонента.
-     * @param {*} props Свойства переданые в компонент.
-     * @param {*} context Контекст.
-     * @return {undefined}
-     */
-    constructor(props, context) {
-        super(props, context);
-        props.centrifugeActionConnectionStatusSet('disconnected');
-    }
+  state = {
+    centrifuge: new CentrifugeJS(),
+  };
 
-    /**
-     * Обработать подкулючение.
-     * @return {undefined}
-     */
-    handleConnect = () => {
-        this.props.centrifugeActionConnectionStatusSet('connected');
+  static get timestamp() {
+    return Math.round(Date.now() / 1000).toString();
+  }
+
+  get connectData() {
+    const {secret, url, user} = this.props;
+    const timestamp = Centrifuge.timestamp;
+    const token = Centrifuge.getToken(user, secret, timestamp);
+
+    return {
+      timestamp,
+      token,
+      url,
+      user,
     };
+  }
 
-    /**
-     * Компонент примонтировался.
-     * В данный момент у нас есть возможность использовать refs,
-     * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-     * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-     * @return {undefined}
-     */
-    componentDidMount() {
-        this.props.centrifugeActionConnectionGet();
-        centrifuge.off('connect', this.handleConnect).on('connect', this.handleConnect);
+  static getToken(user, secret, timestamp) {
+    const hmacBody = `${user}${timestamp}`;
+    const shaObj = new JsSHA("SHA-256", "TEXT");
+    shaObj.setHMACKey(secret, "TEXT");
+    shaObj.update(hmacBody);
+    return shaObj.getHMAC("HEX");
+  }
+
+  /**
+   * Отображение компонента
+   * @return {*} Представление компонента.
+   */
+  render() {
+    return (
+      <SocketContext.Provider value={this.state}>
+        {this.props.children}
+      </SocketContext.Provider>
+    );
+  }
+
+  /**
+   * Компонент примонтировался.
+   * В данный момент у нас есть возможность использовать refs,
+   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
+   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
+   * @return {undefined}
+   */
+  componentDidMount() {
+    this.connect();
+  }
+
+  connect() {
+    const {centrifuge} = this.state;
+    if (centrifuge.isDisconnected()) {
+      centrifuge.configure(this.connectData);
+      centrifuge.connect();
     }
+  }
 
-    /**
-     * Вызывается сразу перед тем, как компонент будет удален из DOM.
-     * @return {undefined}
-     */
-    componentWillUnmount() {
-        centrifuge.removeAllListeners();
-    }
-
-    /**
-     * Отображение компонента
-     * @return {*} Представление компонента.
-     */
-    render() {
-        return null;
-    }
-
-    /**
-     * Вызывается сразу после render.
-     * Не вызывается в момент первого render'а компонента.
-     // * @param {*} props Предыдущие свойства.
-     // * @param {*} state Предыдущее состояние.
-     * @return {undefined}
-     */
-    componentDidUpdate() {
-        this.connect();
-    }
-
-    connect() {
-        const {centrifugeActionConnectionStatusSet, centrifugeConnectData, centrifugeConnectionStatus} = this.props;
-
-        if ('disconnected' === centrifugeConnectionStatus) {
-            if (centrifugeConnectData) {
-                centrifugeActionConnectionStatusSet('connecting');
-                centrifuge.configure(centrifugeConnectData);
-                centrifuge.connect();
-            }
-        }
-    }
+  /**
+   * Вызывается сразу перед тем, как компонент будет удален из DOM.
+   * @return {undefined}
+   */
+  componentWillUnmount() {
+    this.state.centrifuge.removeAllListeners();
+  }
 }
 
-export default compose(
-    connect(
-        (state) => ({
-            centrifugeConnectData: centrifugeSelectorConnectData(state),
-            centrifugeConnectionStatus: centrifugeSelectorConnectionStatus(state),
-        }),
-        {
-            centrifugeActionConnectionGet,
-            centrifugeActionConnectionStatusSet,
-        }
-    )
-)(Centrifuge);
+export default Centrifuge;
