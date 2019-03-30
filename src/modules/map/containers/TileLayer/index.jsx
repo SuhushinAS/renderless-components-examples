@@ -49,10 +49,8 @@ class TileLayer extends React.PureComponent {
   layerAdd(props) {
     const {leaflet, params, url} = props;
 
-    if (leaflet) {
-      this.layer = new L.TileLayer(url, params);
-      leaflet.addLayer(this.layer);
-    }
+    this.layer = new L.TileLayer(url, params);
+    leaflet.addLayer(this.layer);
   }
 
   /**
@@ -60,11 +58,7 @@ class TileLayer extends React.PureComponent {
    * @return {undefined}
    */
   layerDelete(props) {
-    const {leaflet} = props;
-
-    if (leaflet) {
-      leaflet.removeLayer(this.layer);
-    }
+    props.leaflet.removeLayer(this.layer);
   }
 }
 

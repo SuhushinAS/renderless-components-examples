@@ -49,11 +49,7 @@ class GeoJSON extends React.PureComponent {
    * @return {undefined}
    */
   layerDelete(props) {
-    const {leaflet} = props;
-
-    if (leaflet) {
-      leaflet.removeLayer(this.layer);
-    }
+    props.leaflet.removeLayer(this.layer);
   }
 
   /**

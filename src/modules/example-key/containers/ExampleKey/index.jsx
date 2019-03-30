@@ -8,18 +8,12 @@ import React from 'react';
 const keyList = Object.keys(keys);
 
 class ExampleKey extends React.Component {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
-  static defaultProps = {};
-
   state = {
     keyEvents: {},
     keys: {},
   };
 
-  getKeyList() {
+  get keyList() {
     return {
       keydown: Object.keys(this.state.keys).reduce(this.getKey, {}),
     };
@@ -44,10 +38,10 @@ class ExampleKey extends React.Component {
         [e.keyCode]: true,
       },
     }));
-    setTimeout(this.clearKeyups);
+    setTimeout(this.clearKeyEvents);
   };
 
-  hendleKeyChange = (key) => {
+  handleKeyChange = (key) => {
     const keyCode = keys[key];
     this.setState((state) => ({
       ...state,
@@ -70,13 +64,13 @@ class ExampleKey extends React.Component {
 
   renderKey = (key) => <Key id={key} isActive={this.state.keyEvents[keys[key]]} key={key} />;
 
-  renderKeyItem = (key) => <KeyItem id={key} key={key} onChange={this.hendleKeyChange} value={this.state.keys} />;
+  renderKeyItem = (key) => <KeyItem id={key} key={key} onChange={this.handleKeyChange} value={this.state.keys} />;
 
   renderMain() {
     return (
       <div>
         {keyList.map(this.renderKey)}
-        <KeyHandler keyList={this.getKeyList()} />
+        <KeyHandler keyList={this.keyList} />
       </div>
     );
   }
@@ -90,7 +84,7 @@ class ExampleKey extends React.Component {
     );
   }
 
-  clearKeyups = () => {
+  clearKeyEvents = () => {
     this.setState({keyEvents: {}})
   };
 }

@@ -13,12 +13,6 @@ const geoJSONIdList = Object.keys(geoJSONData);
 const tileLayerIdList = Object.keys(tileLayerData);
 
 class ExampleMap extends React.Component {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
-  static defaultProps = {};
-
   state = {
     showData: {},
     tileLayerId: tileLayerIdList[0],

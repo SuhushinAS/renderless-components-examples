@@ -1,29 +1,20 @@
-import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.js';
-import {exampleSelectorList} from 'modules/example/selectors/index.js';
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {compose} from 'redux';
 
 class Example extends React.Component {
   /**
    * Значения свойств по-умолчанию.
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
    */
-  static defaultProps = {
-    exampleList: [],
-  };
+  static defaultProps = {};
 
   /**
    * Конструктор компонента.
    * @param {*} props Свойства переданые в компонент.
    * @return {undefined}
    */
-  constructor(props) {
-    super(props);
-    props.exampleActionListGet();
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   /**
    * Вывести компонент.
@@ -32,7 +23,7 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <ExampleList list={this.props.exampleList} />
+        Example
       </div>
     );
   }
@@ -72,14 +63,4 @@ class Example extends React.Component {
   // componentWillUnmount() {}
 }
 
-export default compose(
-  withRouter,
-  connect(
-    (state) => ({
-      exampleList: exampleSelectorList(state),
-    }),
-    {
-      exampleActionListGet,
-    }
-  )
-)(Example);
+export default Example;

@@ -12,10 +12,9 @@ class View extends React.Component {
    */
   constructor(props) {
     super(props);
-    const {leaflet} = props;
     this.fly();
 
-    leaflet.on('moveend zoomend', this.handleViewChange);
+    props.leaflet.on('moveend zoomend', this.handleViewChange);
   }
 
   /**
@@ -96,6 +95,7 @@ class View extends React.Component {
    */
   componentDidUpdate(props) {
     const {isLoad, view} = this.props;
+
     if (!props.isLoad && isLoad) {
       this.props.leaflet.invalidateSize();
       this.fly();

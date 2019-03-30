@@ -22,8 +22,6 @@ class Key extends React.Component {
       classList.push('key_active');
     }
 
-    // console.log(classList.join(' '));
-
     return (
       <div className={classList.join(' ')}>
         {id}
