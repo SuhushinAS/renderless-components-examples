@@ -9,7 +9,7 @@ class Subscribe extends React.Component {
    * @return {undefined}
    */
   handleMessage = ({data}) => {
-    this.props.handleMessage(data);
+    this.props.onMessage(data);
   };
 
   eventData = {
@@ -32,8 +32,17 @@ class Subscribe extends React.Component {
    * @return {undefined}
    */
   componentDidMount() {
+    this.props.centrifuge.off('connect', this.handleConnect).on('connect', this.handleConnect);
     this.subscribe();
   }
+
+  /**
+   * Обработать подкулючение.
+   * @return {undefined}
+   */
+  handleConnect = () => {
+    this.forceUpdate();
+  };
 
   /**
    * Должен ли компонент обновиться?

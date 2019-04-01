@@ -1,7 +1,5 @@
 import KeyHandler from 'modules/common/containers/KeyHandler/index.jsx';
-import Layout from 'modules/common/containers/Layout/index.jsx';
 import Key from "modules/example-key/components/Key/index.jsx";
-import KeyItem from 'modules/example-key/components/KeyItem/index.jsx';
 import keys from 'modules/example-key/data/keys.json';
 import React from 'react';
 
@@ -9,47 +7,43 @@ const keyList = Object.keys(keys);
 
 class ExampleKey extends React.Component {
   state = {
-    keyEvents: {},
     keys: {},
-  };
-
-  get keyList() {
-    return {
-      keydown: Object.keys(this.state.keys).reduce(this.getKey, {}),
-    };
-  }
-
-  getKey = (prev, key) => {
-    if (this.state.keys[key]) {
-      return {
-        ...prev,
-        [key]: this.handleKey,
-      };
-    }
-
-    return prev;
   };
 
   handleKey = (e) => {
     this.setState((state) => ({
       ...state,
-      keyEvents: {
-        ...state.keyEvents,
+      keys: {
+        ...state.keys,
         [e.keyCode]: true,
       },
     }));
     setTimeout(this.clearKeyEvents);
   };
 
-  handleKeyChange = (key) => {
-    const keyCode = keys[key];
-    this.setState((state) => ({
-      ...state,
-      keys: {
-        ...state.keys,
-        [keyCode]: !state.keys[keyCode],
-      },
-    }));
+  clearKeyEvents = () => {
+    this.setState({keys: {}})
+  };
+
+  keyList = {
+    keydown: {
+      [keys.Alt]: this.handleKey,
+      [keys.Backspace]: this.handleKey,
+      [keys.Control]: this.handleKey,
+      [keys.Delete]: this.handleKey,
+      [keys.Down]: this.handleKey,
+      [keys.End]: this.handleKey,
+      [keys.Enter]: this.handleKey,
+      [keys.Esc]: this.handleKey,
+      [keys.Home]: this.handleKey,
+      [keys.Insert]: this.handleKey,
+      [keys.Left]: this.handleKey,
+      [keys.PageDown]: this.handleKey,
+      [keys.PageUp]: this.handleKey,
+      [keys.Right]: this.handleKey,
+      [keys.Shift]: this.handleKey,
+      [keys.Up]: this.handleKey,
+    },
   };
 
   /**
@@ -58,16 +52,6 @@ class ExampleKey extends React.Component {
    */
   render() {
     return (
-      <Layout main={this.renderMain()} side={this.renderSide()} />
-    );
-  }
-
-  renderKey = (key) => <Key id={key} isActive={this.state.keyEvents[keys[key]]} key={key} />;
-
-  renderKeyItem = (key) => <KeyItem id={key} key={key} onChange={this.handleKeyChange} value={this.state.keys} />;
-
-  renderMain() {
-    return (
       <div>
         {keyList.map(this.renderKey)}
         <KeyHandler keyList={this.keyList} />
@@ -75,18 +59,7 @@ class ExampleKey extends React.Component {
     );
   }
 
-  renderSide() {
-    return (
-      <fieldset>
-        <legend>Keys</legend>
-        {keyList.map(this.renderKeyItem)}
-      </fieldset>
-    );
-  }
-
-  clearKeyEvents = () => {
-    this.setState({keyEvents: {}})
-  };
+  renderKey = (key) => <Key id={key} isActive={this.state.keys[keys[key]]} key={key} />;
 }
 
 export default ExampleKey;

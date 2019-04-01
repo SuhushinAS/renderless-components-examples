@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "centrifuge": "^1.5.0",
+    "jscent": "^0.2.1",
     "jssha": "^2.3.1",
     "leaflet": "^1.4.0",
     "react": "^16.8.3",
@@ -18,10 +19,11 @@
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node src/server.js",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
