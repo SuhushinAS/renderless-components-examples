@@ -21,10 +21,6 @@ class ExampleKey extends React.Component {
     setTimeout(this.clearKeyEvents);
   };
 
-  clearKeyEvents = () => {
-    this.setState({keys: {}})
-  };
-
   keyList = {
     keydown: {
       [keys.Alt]: this.handleKey,
@@ -44,6 +40,10 @@ class ExampleKey extends React.Component {
       [keys.Shift]: this.handleKey,
       [keys.Up]: this.handleKey,
     },
+  };
+
+  clearKeyEvents = () => {
+    this.setState({keys: {}})
   };
 
   /**

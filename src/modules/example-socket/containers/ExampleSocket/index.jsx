@@ -1,19 +1,20 @@
 import Centrifuge from "modules/centrifuge/containers/Centrifuge/index.jsx";
 import Subscribe from 'modules/centrifuge/containers/Subscribe/index.jsx';
+import geoJSONData from 'modules/example-map/data/geo-json.json';
 import tileLayerData from "modules/example-map/data/tile-layer.json";
-import Marker from "modules/map/containers/Marker/index.jsx";
+import connectData from 'modules/example-socket/data/connect.json';
 import Map from "modules/map/containers/Map/index.jsx";
+import Marker from "modules/map/containers/Marker/index.jsx";
 import TileLayer from "modules/map/containers/TileLayer/index.jsx";
 import View from "modules/map/containers/View/index.jsx";
 import React from 'react';
-import connectData from 'modules/example-socket/data/connect.json';
-import geoJSONData from 'modules/example-map/data/geo-json.json';
 
 const geoJSONList = Object.keys(geoJSONData).map((id) => geoJSONData[id]);
 const user = 'user';
 
 class ExampleSocket extends React.Component {
   state = {};
+
   /**
    * Вывести компонент.
    * @return {*} Представление.
