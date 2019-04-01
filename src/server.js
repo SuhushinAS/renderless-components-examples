@@ -40,7 +40,7 @@ class PathGenerator {
 
   proccess() {
     const point = this.coordinates[this.position];
-    this.client.publish("test", this.format(point));
+    this.client.publish("userstory-to-devpro", point);
   }
 
   format(coordinates) {
@@ -56,5 +56,3 @@ class PathGenerator {
 }
 
 new PathGenerator(connectData, geoJSONData.Path);
-
-// client.publish("test", {"input": "test"});

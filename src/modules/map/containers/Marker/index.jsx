@@ -27,15 +27,12 @@ class GeoJSON extends React.PureComponent {
   /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render'а компонента.
-   * @param {*} props Предыдущие свойства.
+   // * @param {*} props Предыдущие свойства.
    // * @param {*} state Предыдущее состояние.
    * @return {undefined}
    */
-  componentDidUpdate(props) {
-    const {geoJSON} = this.props;
-    const latlng = L.GeoJSON.coordsToLatLng(geoJSON.geometry.coordinates);
-
-    this.layer.setLatLng(latlng);
+  componentDidUpdate() {
+    this.layer.setLatLng(L.GeoJSON.coordsToLatLng(this.props.point));
   }
 
   /**
@@ -51,8 +48,8 @@ class GeoJSON extends React.PureComponent {
    * @return {undefined}
    */
   layerAdd(props) {
-    const {geoJSON, leaflet} = props;
-    this.layer = L.GeoJSON.geometryToLayer(geoJSON);
+    const {point, leaflet} = props;
+    this.layer = L.marker(L.GeoJSON.coordsToLatLng(point));
     leaflet.addLayer(this.layer);
   }
 

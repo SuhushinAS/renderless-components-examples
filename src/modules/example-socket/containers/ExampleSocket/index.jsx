@@ -27,14 +27,14 @@ class ExampleSocket extends React.Component {
           <View view={geoJSONList} />
           {this.renderPoint()}
         </Map>
-        <Subscribe channel="test" onMessage={this.handleMessage} />
+        <Subscribe channel="userstory-to-devpro" onMessage={this.handleMessage} />
       </Centrifuge>
     );
   }
 
   renderPoint() {
     if (this.state.point) {
-      return <Marker geoJSON={this.state.point} />;
+      return <Marker point={this.state.point} />;
     }
   }
 
