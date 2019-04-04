@@ -9,16 +9,6 @@ class Map extends React.PureComponent {
     leaflet: undefined,
   };
 
-  /**
-   * Конструктор компонента.
-   * @param {*} props Свойства переданые в компонент.
-   * @return {undefined}
-   */
-  constructor(props) {
-    super(props);
-    window.addEventListener('load', this.handleLoad);
-  }
-
   handleLoad = () => {
     this.setState({isLoad: true});
   };
@@ -57,6 +47,7 @@ class Map extends React.PureComponent {
     const leaflet = L.map(this.map);
     this.setState({leaflet});
     leaflet.on('click', this.handleClick);
+    window.addEventListener('load', this.handleLoad);
   }
 
   /**

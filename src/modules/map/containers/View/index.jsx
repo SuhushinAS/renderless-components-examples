@@ -6,18 +6,6 @@ class View extends React.Component {
   bounds;
 
   /**
-   * Конструктор компонента.
-   * @param {*} props Свойства переданые в компонент.
-   * @return {undefined}
-   */
-  constructor(props) {
-    super(props);
-    this.fly();
-
-    props.leaflet.on('moveend zoomend', this.handleViewChange);
-  }
-
-  /**
    * Получить "очищеные" координаты границ.
    * @param {*} bounds Границы.
    * @return {*} Границы.
@@ -54,8 +42,7 @@ class View extends React.Component {
    */
   fly() {
     const {leaflet, view} = this.props;
-    const layer = L.geoJSON(view);
-    const bounds = layer.getBounds();
+    const bounds = View.getBounds(view);
     if (bounds.isValid()) {
       leaflet.fitBounds(bounds);
     } else {
@@ -84,6 +71,18 @@ class View extends React.Component {
    */
   render() {
     return null;
+  }
+
+  /**
+   * Компонент примонтировался.
+   * В данный момент у нас есть возможность использовать refs,
+   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
+   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
+   * @return {undefined}
+   */
+  componentDidMount() {
+    this.fly();
+    this.props.leaflet.on('moveend zoomend', this.handleViewChange);
   }
 
   /**
