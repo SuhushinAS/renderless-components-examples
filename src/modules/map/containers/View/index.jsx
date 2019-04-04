@@ -37,20 +37,6 @@ class View extends React.Component {
   }
 
   /**
-   * Перейти к виду
-   * @return {undefined}
-   */
-  fly() {
-    const {leaflet, view} = this.props;
-    const bounds = View.getBounds(view);
-    if (bounds.isValid()) {
-      leaflet.fitBounds(bounds);
-    } else {
-      leaflet.fitWorld({padding: [0, 0]});
-    }
-  }
-
-  /**
    * Обработать смену положения карты
    * @return {undefined}
    */
@@ -83,6 +69,20 @@ class View extends React.Component {
   componentDidMount() {
     this.fly();
     this.props.leaflet.on('moveend zoomend', this.handleViewChange);
+  }
+
+  /**
+   * Перейти к виду
+   * @return {undefined}
+   */
+  fly() {
+    const {leaflet, view} = this.props;
+    const bounds = View.getBounds(view);
+    if (bounds.isValid()) {
+      leaflet.fitBounds(bounds);
+    } else {
+      leaflet.fitWorld({padding: [0, 0]});
+    }
   }
 
   /**
