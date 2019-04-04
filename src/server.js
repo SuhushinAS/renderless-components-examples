@@ -12,7 +12,7 @@ class PathGenerator {
     this.timeout = undefined;
     this.tick = this.tick.bind(this);
     this.start();
-  };
+  }
 
   start() {
     this.tick();
@@ -41,17 +41,6 @@ class PathGenerator {
   proccess() {
     const point = this.coordinates[this.position];
     this.client.publish("userstory-to-devpro", point);
-  }
-
-  format(coordinates) {
-    return {
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'Point',
-        coordinates,
-      }
-    };
   }
 }
 
