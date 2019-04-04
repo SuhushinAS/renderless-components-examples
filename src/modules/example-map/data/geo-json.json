@@ -1,25 +1,17 @@
 {
   "DevPro": {
-    "type": "Feature",
-    "properties": {},
-    "geometry": {
-      "type": "Point",
-      "coordinates": [
-        84.950393,
-        56.485355
-      ]
-    }
+    "type": "Point",
+    "coordinates": [
+      84.950393,
+      56.485355
+    ]
   },
   "Userstory": {
-    "type": "Feature",
-    "properties": {},
-    "geometry": {
-      "type": "Point",
-      "coordinates": [
-        84.972891,
-        56.458646
-      ]
-    }
+    "type": "Point",
+    "coordinates": [
+      84.972891,
+      56.458646
+    ]
   },
   "Path": {
     "coordinates": [
