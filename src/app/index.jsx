@@ -2,6 +2,7 @@ import history from 'app/history.js';
 import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
 import ExampleSocket from "modules/example-socket/containers/ExampleSocket/index.jsx";
+import SocketGenerator from "modules/example-socket/containers/SocketGenerator/index.jsx";
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router";
 import {Link, Router} from 'react-router-dom';
@@ -22,6 +23,11 @@ const routeData = {
     component: ExampleSocket,
     name: 'ExampleSocket',
     path: '/example-socket',
+  },
+  'socket-generator': {
+    component: SocketGenerator,
+    name: 'SocketGenerator',
+    path: '/socket-generator',
   },
 };
 

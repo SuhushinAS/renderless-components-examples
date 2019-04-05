@@ -11,3 +11,7 @@
 .layout__main {
   flex-grow: 1;
 }
+
+textarea {
+  resize: none;
+}

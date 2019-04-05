@@ -69,7 +69,13 @@ class Centrifuge extends React.Component {
    * @return {undefined}
    */
   componentWillUnmount() {
-    this.state.centrifuge.removeAllListeners();
+    this.disconnect();
+  }
+
+  disconnect() {
+    const {centrifuge} = this.state;
+    centrifuge.removeAllListeners();
+    centrifuge.disconnect();
   }
 }
 

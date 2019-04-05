@@ -1,3 +1,4 @@
+import {SocketContext} from "modules/centrifuge/context/index.js";
 import withSocket from "modules/centrifuge/hoc/withSocket/index.jsx";
 import React from 'react';
 
@@ -9,11 +10,23 @@ class Subscribe extends React.Component {
    * @return {undefined}
    */
   handleMessage = ({data}) => {
-    this.props.onMessage(data);
+    const {onMessage} = this.props;
+    if (onMessage) {
+      onMessage(data);
+    }
+  };
+
+  handleSubscribe = () => {
+    this.setState({subscription: this.subscription});
   };
 
   eventData = {
     message: this.handleMessage,
+    subscribe: this.handleSubscribe,
+  };
+
+  state = {
+    subscription: undefined,
   };
 
   /**
@@ -21,7 +34,14 @@ class Subscribe extends React.Component {
    * @return {*} Представление компонента.
    */
   render() {
-    return null;
+    return (
+      <SocketContext.Provider value={{
+        centrifuge: this.props.centrifuge,
+        subscription: this.subscription,
+      }}>
+        {this.props.children}
+      </SocketContext.Provider>
+    );
   }
 
   /**
@@ -53,7 +73,7 @@ class Subscribe extends React.Component {
    * @return {boolean} Должен ли компонент обновиться?
    */
   shouldComponentUpdate(props) {
-    return props.channel !== this.props.channel || !this.subscription;
+    return props.channel !== this.props.channel || !this.state.subscription;
   }
 
   /**
