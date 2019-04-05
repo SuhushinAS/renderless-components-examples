@@ -38,9 +38,9 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div className="app">
-          <div className="app__nav">
+          {/*<div className="app__nav">
               {routeList.map(this.renderLink)}
-          </div>
+          </div>*/}
           <div className="app__content">
             <Switch>
               {routeList.map(this.renderRoute)}
