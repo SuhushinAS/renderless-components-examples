@@ -1,5 +1,5 @@
 import history from 'app/history.js';
-import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
+// import ExampleKey from 'modules/example-key/containers/ExampleKey/index.jsx';
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
 import ExampleSocket from "modules/example-socket/containers/ExampleSocket/index.jsx";
 import SocketGenerator from "modules/example-socket/containers/SocketGenerator/index.jsx";
@@ -14,11 +14,11 @@ const routeData = {
     name: 'ExampleMap',
     path: '/example-map',
   },
-  'example-key': {
+  /*'example-key': {
     component: ExampleKey,
     name: 'ExampleKey',
     path: '/example-key',
-  },
+  },*/
   'example-socket': {
     component: ExampleSocket,
     name: 'ExampleSocket',
@@ -38,9 +38,9 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div className="app">
-          {/*<div className="app__nav">
+          <div className="app__nav">
               {routeList.map(this.renderLink)}
-          </div>*/}
+          </div>
           <div className="app__content">
             <Switch>
               {routeList.map(this.renderRoute)}

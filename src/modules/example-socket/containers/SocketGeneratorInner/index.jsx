@@ -31,7 +31,7 @@ class SocketGeneratorInner extends React.Component {
   tick() {
     if (this.state.position < this.length) {
       this.timeout = setTimeout(this.tickBind, this.props.interval);
-      this.process();
+      this.process(this.state.position);
       this.setState(this.setPosition);
     }
   }
@@ -78,11 +78,11 @@ class SocketGeneratorInner extends React.Component {
   handleStop = () => {
     this.handlePause();
     this.setState({position: 0});
-    this.process();
+    this.process(0);
   };
 
-  process() {
-    const point = this.coordinates[this.state.position];
+  process(position) {
+    const point = this.coordinates[position];
     this.props.subscription.publish(point);
   }
 }
