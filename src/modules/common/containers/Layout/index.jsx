@@ -22,7 +22,6 @@ class Layout extends React.Component {
         <div className="layout__main">{this.props.main}</div>
       </div>
     );
-
   }
 }
 

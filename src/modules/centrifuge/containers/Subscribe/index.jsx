@@ -3,6 +3,10 @@ import withSocket from "modules/centrifuge/hoc/withSocket/index.jsx";
 import React from 'react';
 
 class Subscribe extends React.Component {
+  state = {
+    subscription: undefined,
+  };
+
   /**
    * Обработать сообщение.
    * @param {string} channel Канал.
@@ -23,10 +27,6 @@ class Subscribe extends React.Component {
   eventData = {
     message: this.handleMessage,
     subscribe: this.handleSubscribe,
-  };
-
-  state = {
-    subscription: undefined,
   };
 
   /**
