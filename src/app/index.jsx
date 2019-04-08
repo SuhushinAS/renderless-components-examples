@@ -46,16 +46,16 @@ class App extends React.Component {
     }
   };
 
-  toggleNav = (state) => ({
-    ...state,
-    showNav: !state.showNav,
-  });
-
   keyList = {
     keydown: {
       78: this.handleKey,
     },
   };
+
+  toggleNav = (state) => ({
+    ...state,
+    showNav: !state.showNav,
+  });
 
   render() {
     return (
