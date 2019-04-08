@@ -47,13 +47,20 @@ class Map extends React.PureComponent {
     const leaflet = L.map(this.map);
     this.setState({leaflet});
     window.addEventListener('load', this.handleLoad);
+    leaflet.on('click', this.handleClick);
   }
+
+  handleClick = (e) => {
+    const geoJSON = L.marker(e.latlng).toGeoJSON();
+    console.log(JSON.stringify(geoJSON));
+  };
 
   /**
    * Вызывается сразу перед тем, как компонент будет удален из DOM.
    * @return {undefined}
    */
   componentWillUnmount() {
+    this.state.leaflet.off('click', this.handleClick);
     this.state.leaflet.remove();
     this.setState({leaflet: undefined});
     window.removeEventListener('load', this.handleLoad);

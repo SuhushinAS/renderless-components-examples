@@ -2,6 +2,7 @@ import history from 'app/history.js';
 import If from "modules/common/containers/If/index.jsx";
 import KeyHandler from "modules/common/containers/KeyHandler/index.jsx";
 import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
+import ExampleMapGlitch from 'modules/example-map/containers/ExampleMapGlitch/index.jsx';
 import ExampleSocket from "modules/example-socket/containers/ExampleSocket/index.jsx";
 import SocketGenerator from "modules/example-socket/containers/SocketGenerator/index.jsx";
 import React from 'react';
@@ -14,6 +15,11 @@ const routeData = {
     component: ExampleMap,
     name: 'ExampleMap',
     path: '/example-map',
+  },
+  'example-map-glitch': {
+    component: ExampleMapGlitch,
+    name: 'ExampleMapGlitch',
+    path: '/example-map-glitch',
   },
   'example-socket': {
     component: ExampleSocket,

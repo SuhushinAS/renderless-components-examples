@@ -5,33 +5,6 @@ import React from 'react';
 class View extends React.Component {
   bounds;
 
-  /**
-   * Получить "очищеные" координаты границ.
-   * @param {*} bounds Границы.
-   * @return {*} Границы.
-   */
-  static getBoundsClean(bounds) {
-    const nextBounds = View.getBoundsNext(bounds);
-
-    if (nextBounds.equals(bounds)) {
-      return bounds;
-    }
-
-    return View.getBoundsClean(nextBounds);
-  }
-
-  /**
-   * Сделать цикл: bounds->layer->geoJSON->bounds для "очистки" координат границ.
-   * @param {*} bounds Границы.
-   * @return {undefined}
-   */
-  static getBoundsNext(bounds) {
-    const rectangle = L.rectangle(bounds);
-    const view = rectangle.toGeoJSON();
-
-    return View.getBounds(view);
-  }
-
   static getBounds(view) {
     return L.geoJSON(view).getBounds();
   }
@@ -44,7 +17,7 @@ class View extends React.Component {
     const {leaflet, onViewChange} = this.props;
 
     if (onViewChange) {
-      const bounds = View.getBoundsClean(leaflet.getBounds());
+      const bounds = leaflet.getBounds();
       const rectangle = L.rectangle(bounds);
       const view = rectangle.toGeoJSON();
       onViewChange(view);
@@ -80,6 +53,12 @@ class View extends React.Component {
     const bounds = View.getBounds(view);
     if (bounds.isValid()) {
       leaflet.fitBounds(bounds);
+      const rectangle = L.rectangle(bounds);
+      rectangle.setStyle({
+        color: '#aaaaaa',
+        dashArray: '4 8',
+      });
+      leaflet.addLayer(rectangle);
     } else {
       leaflet.fitWorld({padding: [0, 0]});
     }
