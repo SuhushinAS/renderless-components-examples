@@ -53,12 +53,6 @@ class View extends React.Component {
     const bounds = View.getBounds(view);
     if (bounds.isValid()) {
       leaflet.fitBounds(bounds);
-      const rectangle = L.rectangle(bounds);
-      rectangle.setStyle({
-        color: '#aaaaaa',
-        dashArray: '4 8',
-      });
-      leaflet.addLayer(rectangle);
     } else {
       leaflet.fitWorld({padding: [0, 0]});
     }
