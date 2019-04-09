@@ -4,6 +4,14 @@ import React from 'react';
 
 class GeoJSON extends React.PureComponent {
   /**
+   * Отображение компонента
+   * @return {*} Представление компонента.
+   */
+  render() {
+    return null;
+  }
+
+  /**
    * Компонент примонтировался.
    * В данный момент у нас есть возможность использовать refs,
    * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
@@ -50,14 +58,6 @@ class GeoJSON extends React.PureComponent {
    */
   layerDelete(props) {
     props.leaflet.removeLayer(this.layer);
-  }
-
-  /**
-   * Отображение компонента
-   * @return {*} Представление компонента.
-   */
-  render() {
-    return null;
   }
 }
 
