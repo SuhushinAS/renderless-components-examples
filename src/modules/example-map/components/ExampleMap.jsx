@@ -88,9 +88,13 @@ class ExampleMap extends React.Component {
 
   renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
 
-  renderGeoJSONField = (id) => <GeoJSONField key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />;
+  renderGeoJSONField = (id) => (
+    <GeoJSONField key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />
+  );
 
-  renderTileLayerField = (id) => <TileLayerField key={id} onChange={this.handleTileLayerChange} id={id} value={this.state.tileLayerId} />;
+  renderTileLayerField = (id) => (
+    <TileLayerField key={id} onChange={this.handleTileLayerChange} id={id} value={this.state.tileLayerId} />
+  );
 }
 
 export default ExampleMap;
