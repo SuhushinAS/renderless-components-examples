@@ -1,9 +1,9 @@
 import history from 'app/history.js';
-import If from "modules/common/containers/If/index.jsx";
-import KeyHandler from "modules/common/containers/KeyHandler/index.jsx";
-import ExampleMap from 'modules/example-map/containers/ExampleMap/index.jsx';
-import ExampleSocket from "modules/example-socket/containers/ExampleSocket/index.jsx";
-import SocketGenerator from "modules/example-socket/containers/SocketGenerator/index.jsx";
+import If from "modules/common/components/If.jsx";
+import KeyHandler from "modules/common/components/KeyHandler.jsx";
+import ExampleMap from 'modules/example-map/components/ExampleMap.jsx';
+import ExampleSocket from "modules/example-socket/components/ExampleSocket.jsx";
+import SocketGenerator from "modules/example-socket/components/SocketGenerator.jsx";
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router";
 import {Link, Router} from 'react-router-dom';
