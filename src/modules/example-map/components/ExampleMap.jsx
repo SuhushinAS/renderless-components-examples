@@ -45,7 +45,7 @@ class ExampleMap extends React.Component {
       <React.Fragment>
         <fieldset>
           <legend>Tile layer</legend>
-          {tileLayerIdList.map(this.renderTileLayer)}
+          {tileLayerIdList.map(this.renderTileLayerField)}
         </fieldset>
         <fieldset>
           <legend>View</legend>
@@ -58,7 +58,7 @@ class ExampleMap extends React.Component {
         </fieldset>
         <fieldset>
           <legend>GeoJSON</legend>
-          {geoJSONIdList.map(this.renderGeoJSONItem)}
+          {geoJSONIdList.map(this.renderGeoJSONField)}
         </fieldset>
       </React.Fragment>
     );
@@ -88,9 +88,9 @@ class ExampleMap extends React.Component {
 
   renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
 
-  renderGeoJSONItem = (id) => <GeoJSONField key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />;
+  renderGeoJSONField = (id) => <GeoJSONField key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />;
 
-  renderTileLayer = (id) => <TileLayerField key={id} onChange={this.handleTileLayerChange} id={id} value={this.state.tileLayerId} />;
+  renderTileLayerField = (id) => <TileLayerField key={id} onChange={this.handleTileLayerChange} id={id} value={this.state.tileLayerId} />;
 }
 
 export default ExampleMap;
