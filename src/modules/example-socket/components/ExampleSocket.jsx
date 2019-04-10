@@ -19,6 +19,7 @@ class ExampleSocket extends React.Component {
   static defaultProps = {
     user: 'user',
   };
+
   state = {};
 
   handleMessage = (message) => {
