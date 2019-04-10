@@ -17,7 +17,8 @@ class SocketGenerator extends React.Component {
   state = {
     position: 0,
   };
-  subscription = undefined;
+
+  subscription;
 
   /**
    * Конструктор компонента.
