@@ -56,20 +56,20 @@ class Centrifuge extends React.Component {
     this.connect();
   }
 
-  connect() {
-    const {centrifuge} = this.state;
-    if (centrifuge.isDisconnected()) {
-      centrifuge.configure(this.connectData);
-      centrifuge.connect();
-    }
-  }
-
   /**
    * Вызывается сразу перед тем, как компонент будет удален из DOM.
    * @return {undefined}
    */
   componentWillUnmount() {
     this.disconnect();
+  }
+
+  connect() {
+    const {centrifuge} = this.state;
+    if (centrifuge.isDisconnected()) {
+      centrifuge.configure(this.connectData);
+      centrifuge.connect();
+    }
   }
 
   disconnect() {
