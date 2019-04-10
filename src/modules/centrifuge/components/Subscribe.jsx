@@ -1,32 +1,26 @@
-import {SocketContext} from "modules/centrifuge/context/SocketContext.js";
 import withSocket from "modules/centrifuge/hoc/withSocket.jsx";
 import React from 'react';
 
 class Subscribe extends React.Component {
-  state = {
-    subscription: undefined,
-  };
+  subscription = undefined;
 
   /**
-   * Обработать сообщение.
-   * @param {string} channel Канал.
-   * @param {*} data Данные.
+   * Конструктор компонента.
+   * @param {*} props Свойства переданые в компонент.
    * @return {undefined}
    */
-  handleMessage = ({data}) => {
-    const {onMessage} = this.props;
-    if (onMessage) {
-      onMessage(data);
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.eventData = {
+      ...props.eventData,
+      subscribe: this.handleSubscribe,
+    };
+  }
 
   handleSubscribe = () => {
-    this.setState({subscription: this.subscription});
-  };
-
-  eventData = {
-    message: this.handleMessage,
-    subscribe: this.handleSubscribe,
+    if (this.props.eventData && this.props.eventData.subscribe && this.subscription) {
+      this.props.eventData.subscribe(this.subscription);
+    }
   };
 
   /**
@@ -34,14 +28,7 @@ class Subscribe extends React.Component {
    * @return {*} Представление компонента.
    */
   render() {
-    return (
-      <SocketContext.Provider value={{
-        centrifuge: this.props.centrifuge,
-        subscription: this.subscription,
-      }}>
-        {this.props.children}
-      </SocketContext.Provider>
-    );
+    return null;
   }
 
   /**
@@ -52,7 +39,7 @@ class Subscribe extends React.Component {
    * @return {undefined}
    */
   componentDidMount() {
-    this.props.centrifuge.off('connect', this.handleConnect).on('connect', this.handleConnect);
+    this.props.centrifuge.on('connect', this.handleConnect);
     this.subscribe();
   }
 
@@ -73,7 +60,7 @@ class Subscribe extends React.Component {
    * @return {boolean} Должен ли компонент обновиться?
    */
   shouldComponentUpdate(props) {
-    return props.channel !== this.props.channel || !this.state.subscription;
+    return props.channel !== this.props.channel || !this.subscription;
   }
 
   /**
@@ -117,6 +104,7 @@ class Subscribe extends React.Component {
    * @return {undefined}
    */
   componentWillUnmount() {
+    this.props.centrifuge.off('connect', this.handleConnect);
     this.unsubscribe();
   }
 }

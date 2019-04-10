@@ -1,5 +1,5 @@
-import React from 'react';
 import 'modules/example-key/components/Key.css';
+import React from 'react';
 
 class Key extends React.Component {
   /**

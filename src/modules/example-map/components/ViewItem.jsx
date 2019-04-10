@@ -1,5 +1,5 @@
-import React from 'react';
 import 'modules/example-map/components/ViewItem.css';
+import React from 'react';
 
 class ViewItem extends React.Component {
   /**

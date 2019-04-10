@@ -19,8 +19,15 @@ class ExampleSocket extends React.Component {
   static defaultProps = {
     user: 'user',
   };
-
   state = {};
+
+  handleMessage = (message) => {
+    this.setState({point: message.data});
+  };
+
+  eventData = {
+    message: this.handleMessage,
+  };
 
   /**
    * Вывести компонент.
@@ -34,7 +41,7 @@ class ExampleSocket extends React.Component {
           <View view={geoJSONList} />
           {this.renderPoint()}
         </Map>
-        <Subscribe channel="userstory-to-devpro" onMessage={this.handleMessage} />
+        <Subscribe channel="userstory-to-devpro" eventData={this.eventData} />
       </Centrifuge>
     );
   }
@@ -44,10 +51,6 @@ class ExampleSocket extends React.Component {
       return <Marker point={this.state.point} />;
     }
   }
-
-  handleMessage = (point) => {
-    this.setState({point});
-  };
 }
 
 export default ExampleSocket;

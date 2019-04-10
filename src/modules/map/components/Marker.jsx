@@ -1,7 +1,7 @@
 import L from 'leaflet';
+import 'modules/map/components/Marker.css';
 import withMap from 'modules/map/hoc/withMap.jsx';
 import React from 'react';
-import 'modules/map/components/Marker.css';
 
 // Фикс иконок на картах
 delete L.Icon.Default.prototype._getIconUrl;

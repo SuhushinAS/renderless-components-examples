@@ -1,7 +1,7 @@
 import L from 'leaflet';
+import 'modules/map/components/Map.css';
 import {MapContext} from 'modules/map/context/MapContext.js';
 import React from 'react';
-import 'modules/map/components/Map.css';
 
 class Map extends React.PureComponent {
   state = {

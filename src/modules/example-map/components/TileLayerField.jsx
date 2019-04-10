@@ -1,5 +1,5 @@
-import React from 'react';
 import 'modules/example-map/components/TileLayerField.css';
+import React from 'react';
 
 class TileLayerField extends React.Component {
   /**

@@ -1,5 +1,5 @@
-import React from 'react';
 import 'modules/example-map/components/GeoJSONField.css';
+import React from 'react';
 
 class GeoJSONField extends React.Component {
   /**
