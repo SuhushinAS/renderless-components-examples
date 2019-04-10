@@ -33,6 +33,14 @@ class KeyHandler extends React.Component {
   };
 
   /**
+   * Отображение компонента
+   * @return {*} Представление компонента.
+   */
+  render() {
+    return null;
+  }
+
+  /**
    * Компонент примонтировался.
    * В данный момент у нас есть возможность использовать refs,
    * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
@@ -41,14 +49,6 @@ class KeyHandler extends React.Component {
    */
   componentDidMount() {
     Object.keys(this.props.keyList).forEach(this.handlerAdd);
-  }
-
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
-  componentWillUnmount() {
-    Object.keys(this.props.keyList).forEach(this.handlerRemove);
   }
 
   /**
@@ -66,11 +66,11 @@ class KeyHandler extends React.Component {
   }
 
   /**
-   * Отображение компонента
-   * @return {*} Представление компонента.
+   * Вызывается сразу перед тем, как компонент будет удален из DOM.
+   * @return {undefined}
    */
-  render() {
-    return null;
+  componentWillUnmount() {
+    Object.keys(this.props.keyList).forEach(this.handlerRemove);
   }
 }
 
