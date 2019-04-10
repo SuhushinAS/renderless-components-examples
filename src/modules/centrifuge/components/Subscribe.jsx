@@ -5,6 +5,20 @@ class Subscribe extends React.Component {
   subscription = undefined;
 
   /**
+   * Обработать подкулючение.
+   * @return {undefined}
+   */
+  handleConnect = () => {
+    this.forceUpdate();
+  };
+
+  handleSubscribe = () => {
+    if (this.props.eventData && this.props.eventData.subscribe && this.subscription) {
+      this.props.eventData.subscribe(this.subscription);
+    }
+  };
+
+  /**
    * Конструктор компонента.
    * @param {*} props Свойства переданые в компонент.
    * @return {undefined}
@@ -16,12 +30,6 @@ class Subscribe extends React.Component {
       subscribe: this.handleSubscribe,
     };
   }
-
-  handleSubscribe = () => {
-    if (this.props.eventData && this.props.eventData.subscribe && this.subscription) {
-      this.props.eventData.subscribe(this.subscription);
-    }
-  };
 
   /**
    * Отображение компонента
@@ -42,14 +50,6 @@ class Subscribe extends React.Component {
     this.props.centrifuge.on('connect', this.handleConnect);
     this.subscribe();
   }
-
-  /**
-   * Обработать подкулючение.
-   * @return {undefined}
-   */
-  handleConnect = () => {
-    this.forceUpdate();
-  };
 
   /**
    * Должен ли компонент обновиться?
@@ -76,6 +76,15 @@ class Subscribe extends React.Component {
   }
 
   /**
+   * Вызывается сразу перед тем, как компонент будет удален из DOM.
+   * @return {undefined}
+   */
+  componentWillUnmount() {
+    this.props.centrifuge.off('connect', this.handleConnect);
+    this.unsubscribe();
+  }
+
+  /**
    * Подписаться.
    * @return {void}
    */
@@ -97,15 +106,6 @@ class Subscribe extends React.Component {
       this.subscription.removeAllListeners();
       this.subscription = null;
     }
-  }
-
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
-  componentWillUnmount() {
-    this.props.centrifuge.off('connect', this.handleConnect);
-    this.unsubscribe();
   }
 }
 
