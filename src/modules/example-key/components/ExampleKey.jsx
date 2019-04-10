@@ -21,30 +21,38 @@ class ExampleKey extends React.Component {
     setTimeout(this.clearKeyEvents);
   };
 
-  keyList = {
-    keydown: {
-      [keys.Alt]: this.handleKey,
-      [keys.Backspace]: this.handleKey,
-      [keys.Control]: this.handleKey,
-      [keys.Delete]: this.handleKey,
-      [keys.Down]: this.handleKey,
-      [keys.End]: this.handleKey,
-      [keys.Enter]: this.handleKey,
-      [keys.Esc]: this.handleKey,
-      [keys.Home]: this.handleKey,
-      [keys.Insert]: this.handleKey,
-      [keys.Left]: this.handleKey,
-      [keys.PageDown]: this.handleKey,
-      [keys.PageUp]: this.handleKey,
-      [keys.Right]: this.handleKey,
-      [keys.Shift]: this.handleKey,
-      [keys.Up]: this.handleKey,
-    },
-  };
-
   clearKeyEvents = () => {
     this.setState({keys: {}})
   };
+
+  /**
+   * Конструктор компонента.
+   * @param {*} props Свойства переданые в компонент.
+   * @return {undefined}
+   */
+  constructor(props) {
+    super(props);
+    this.keyList = {
+      keydown: {
+        [keys.Alt]: this.handleKey,
+        [keys.Backspace]: this.handleKey,
+        [keys.Control]: this.handleKey,
+        [keys.Delete]: this.handleKey,
+        [keys.Down]: this.handleKey,
+        [keys.End]: this.handleKey,
+        [keys.Enter]: this.handleKey,
+        [keys.Esc]: this.handleKey,
+        [keys.Home]: this.handleKey,
+        [keys.Insert]: this.handleKey,
+        [keys.Left]: this.handleKey,
+        [keys.PageDown]: this.handleKey,
+        [keys.PageUp]: this.handleKey,
+        [keys.Right]: this.handleKey,
+        [keys.Shift]: this.handleKey,
+        [keys.Up]: this.handleKey,
+      },
+    };
+  }
 
   /**
    * Вывести компонент.
