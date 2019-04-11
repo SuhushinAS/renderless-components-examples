@@ -10,7 +10,7 @@ class SocketGenerator extends React.Component {
    * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
    */
   static defaultProps = {
-    interval: 300,
+    interval: 150,
     user: 'user',
   };
 
