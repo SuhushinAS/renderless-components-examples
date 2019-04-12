@@ -38,7 +38,7 @@ class ExampleSocket extends React.Component {
           <View view={geoJSONList} />
           {this.renderPoint()}
         </Map>
-        <Subscribe channel="userstory-to-devpro" eventData={this.eventData} />
+        <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
       </Centrifuge>
     );
   }
