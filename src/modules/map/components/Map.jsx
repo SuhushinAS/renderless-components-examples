@@ -36,7 +36,6 @@ class Map extends React.PureComponent {
 
   componentWillUnmount() {
     this.state.leaflet.remove();
-    this.setState({leaflet: undefined});
     window.removeEventListener('load', this.handleLoad);
   }
 }

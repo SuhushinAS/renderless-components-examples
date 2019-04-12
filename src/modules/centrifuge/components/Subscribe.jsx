@@ -6,7 +6,7 @@ class Subscribe extends React.Component {
     eventData: {},
   };
 
-  subscription = undefined;
+  subscription = null;
 
   constructor(props) {
     super(props);
@@ -54,7 +54,6 @@ class Subscribe extends React.Component {
 
   subscribe() {
     const {centrifuge, channel} = this.props;
-
     if (centrifuge.isConnected() && !this.subscription) {
       this.subscription = centrifuge.subscribe(channel, this.eventData);
     }
