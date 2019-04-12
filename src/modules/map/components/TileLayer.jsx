@@ -22,7 +22,6 @@ class TileLayer extends React.PureComponent {
 
   layerAdd(props) {
     const {leaflet, params, url} = props;
-
     this.layer = new L.TileLayer(url, params);
     leaflet.addLayer(this.layer);
   }
