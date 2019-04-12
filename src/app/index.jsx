@@ -77,12 +77,14 @@ class App extends React.Component {
     return null;
   }
 
-  renderLink = (routeId) => <Link className="app__nav-link"
+  renderLink = (routeId) => <Link
+    className="app__nav-link"
     key={routeId}
     to={routeData[routeId].path}
   >{routeData[routeId].name}</Link>;
 
-  renderRoute = (routeId) => <Route component={routeData[routeId].component}
+  renderRoute = (routeId) => <Route
+    component={routeData[routeId].component}
     key={routeId}
     path={routeData[routeId].path}
   />;

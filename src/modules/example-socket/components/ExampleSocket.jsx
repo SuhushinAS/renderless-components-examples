@@ -28,7 +28,8 @@ class ExampleSocket extends React.Component {
 
   render() {
     return (
-      <Centrifuge secret={connectData.secret}
+      <Centrifuge
+        secret={connectData.secret}
         url={connectData.url}
         user={this.props.user}
       >

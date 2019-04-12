@@ -66,11 +66,13 @@ class SocketGenerator extends React.Component {
         </fieldset>
         <fieldset>
           <legend>Current</legend>
-          <textarea disabled
+          <textarea
+            disabled
             value={JSON.stringify(this.coordinates[this.state.position])}
           />
         </fieldset>
-        <Centrifuge secret={connectData.secret}
+        <Centrifuge
+          secret={connectData.secret}
           url={connectData.url}
           user={this.props.user}
         >

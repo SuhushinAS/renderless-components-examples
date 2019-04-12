@@ -1,12 +1,8 @@
 import Layout from 'modules/common/components/Layout.jsx';
-import GeoJSONField from "modules/example-map/components/GeoJSONField.jsx";
-import TileLayerField from 'modules/example-map/components/TileLayerField.jsx';
+import ExampleMapMain from "modules/example-map/components/ExampleMapMain.jsx";
+import ExampleMapSide from "modules/example-map/components/ExampleMapSide.jsx";
 import geoJSONData from 'modules/example-map/data/geo-json.json';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
-import GeoJSON from 'modules/map/components/GeoJSON.jsx';
-import Map from "modules/map/components/Map.jsx";
-import TileLayer from 'modules/map/components/TileLayer.jsx';
-import View from 'modules/map/components/View.jsx';
 import React from 'react';
 
 const geoJSONIdList = Object.keys(geoJSONData);
@@ -29,38 +25,26 @@ class ExampleMap extends React.Component {
     const geoJSONList = geoJSONIdList
       .filter(this.filterGeoJSON)
       .map(this.getGeoJSON);
-    const tileLayer = tileLayerData[this.state.tileLayerId];
     return (
-      <Map>
-        <TileLayer params={tileLayer.params} url={tileLayer.url} />
-        <View onViewChange={this.handleViewChange} view={geoJSONList} />
-        {geoJSONList.map(this.renderGeoJSON)}
-      </Map>
+      <ExampleMapMain
+        geoJSONList={geoJSONList}
+        onViewChange={this.handleViewChange}
+        tileLayer={tileLayerData[this.state.tileLayerId]}
+      />
     );
   }
 
   renderSide() {
     return (
-      <React.Fragment>
-        <fieldset>
-          <legend>Tile layer</legend>
-          {tileLayerIdList.map(this.renderTileLayerField)}
-        </fieldset>
-        <fieldset>
-          <legend>View</legend>
-          <textarea cols="31"
-            disabled
-            id="view"
-            name="view"
-            rows="31"
-            value={JSON.stringify(this.state.view, undefined, 2)}
-          />
-        </fieldset>
-        <fieldset>
-          <legend>GeoJSON</legend>
-          {geoJSONIdList.map(this.renderGeoJSONField)}
-        </fieldset>
-      </React.Fragment>
+      <ExampleMapSide
+        geoJSONIdList={geoJSONIdList}
+        tileLayerIdList={tileLayerIdList}
+        onGeoJSONChange={this.handleGeoJSONChange}
+        onTileLayerChange={this.handleTileLayerChange}
+        showData={this.state.showData}
+        tileLayerId={this.state.tileLayerId}
+        view={this.state.view}
+      />
     );
   }
 
@@ -85,24 +69,6 @@ class ExampleMap extends React.Component {
   handleViewChange = (view) => {
     this.setState({view});
   };
-
-  renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
-
-  renderGeoJSONField = (id) => (
-    <GeoJSONField key={id}
-      onChange={this.handleGeoJSONChange}
-      id={id}
-      value={this.state.showData}
-    />
-  );
-
-  renderTileLayerField = (id) => (
-    <TileLayerField key={id}
-      onChange={this.handleTileLayerChange}
-      id={id}
-      value={this.state.tileLayerId}
-    />
-  );
 }
 
 export default ExampleMap;

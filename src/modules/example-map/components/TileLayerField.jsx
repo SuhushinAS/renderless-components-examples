@@ -11,7 +11,8 @@ class TileLayerField extends React.Component {
     const {id, value} = this.props;
     return (
       <label className="tile-radio" htmlFor={id}>
-        <input id={id}
+        <input
+          id={id}
           name="tile"
           onChange={this.handleChange}
           checked={value === id}
