@@ -1,12 +1,9 @@
-import Centrifuge from "modules/centrifuge/components/Centrifuge.jsx";
-import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
 import geoJSONData from 'modules/example-map/data/geo-json.json';
 import tileLayerData from "modules/example-map/data/tile-layer.json";
+import ExampleSocketMain
+  from "modules/example-socket/components/ExampleSocketMain.jsx";
 import connectData from 'modules/example-socket/data/connect.json';
-import Map from "modules/map/components/Map.jsx";
 import Marker from "modules/map/components/Marker.jsx";
-import TileLayer from "modules/map/components/TileLayer.jsx";
-import View from "modules/map/components/View.jsx";
 import React from 'react';
 
 const geoJSONList = Object.keys(geoJSONData).map((id) => geoJSONData[id]);
@@ -28,18 +25,11 @@ class ExampleSocket extends React.Component {
 
   render() {
     return (
-      <Centrifuge
-        secret={connectData.secret}
-        url={connectData.url}
-        user={this.props.user}
-      >
-        <Map>
-          <TileLayer {...tileLayerData.Stamen} />
-          <View view={geoJSONList} />
-          {this.renderPoint()}
-        </Map>
-        <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
-      </Centrifuge>
+      <ExampleSocketMain
+        connectData={connectData}
+        geoJSONList={geoJSONList}
+        tileLayer={tileLayerData.Stamen}
+      />
     );
   }
 
