@@ -3,7 +3,8 @@ import If from "modules/common/components/If.jsx";
 import KeyHandler from "modules/common/components/KeyHandler.jsx";
 import ExampleMap from 'modules/example-map/components/ExampleMap.jsx';
 import ExampleSocket from "modules/example-socket/components/ExampleSocket.jsx";
-import SocketGenerator from "modules/example-socket/components/SocketGenerator.jsx";
+import SocketGenerator
+  from "modules/example-socket/components/SocketGenerator.jsx";
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router";
 import {Link, Router} from 'react-router-dom';
@@ -76,9 +77,15 @@ class App extends React.Component {
     return null;
   }
 
-  renderLink = (routeId) => <Link className="app__nav-link" key={routeId} to={routeData[routeId].path}>{routeData[routeId].name}</Link>;
+  renderLink = (routeId) => <Link className="app__nav-link"
+    key={routeId}
+    to={routeData[routeId].path}
+  >{routeData[routeId].name}</Link>;
 
-  renderRoute = (routeId) => <Route component={routeData[routeId].component} key={routeId} path={routeData[routeId].path} />;
+  renderRoute = (routeId) => <Route component={routeData[routeId].component}
+    key={routeId}
+    path={routeData[routeId].path}
+  />;
 }
 
 export default App;

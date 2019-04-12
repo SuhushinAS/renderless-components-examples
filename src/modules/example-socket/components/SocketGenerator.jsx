@@ -5,10 +5,6 @@ import connectData from 'modules/example-socket/data/connect.json';
 import React from 'react';
 
 class SocketGenerator extends React.Component {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
   static defaultProps = {
     interval: 150,
     user: 'user',
@@ -20,11 +16,6 @@ class SocketGenerator extends React.Component {
 
   subscription;
 
-  /**
-   * Конструктор компонента.
-   * @param {*} props Свойства переданые в компонент.
-   * @return {undefined}
-   */
   constructor(props) {
     super(props);
     this.coordinates = geoJSONData.Path.coordinates;
@@ -62,10 +53,6 @@ class SocketGenerator extends React.Component {
     position: state.position + 1,
   });
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
       <div>
@@ -79,9 +66,14 @@ class SocketGenerator extends React.Component {
         </fieldset>
         <fieldset>
           <legend>Current</legend>
-          <textarea disabled value={JSON.stringify(this.coordinates[this.state.position])} />
+          <textarea disabled
+            value={JSON.stringify(this.coordinates[this.state.position])}
+          />
         </fieldset>
-        <Centrifuge secret={connectData.secret} url={connectData.url} user={this.props.user}>
+        <Centrifuge secret={connectData.secret}
+          url={connectData.url}
+          user={this.props.user}
+        >
           <Subscribe channel="userstory-to-devpro" eventData={this.eventData} />
         </Centrifuge>
       </div>

@@ -12,10 +12,6 @@ import React from 'react';
 const geoJSONList = Object.keys(geoJSONData).map((id) => geoJSONData[id]);
 
 class ExampleSocket extends React.Component {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
   static defaultProps = {
     user: 'user',
   };
@@ -30,13 +26,12 @@ class ExampleSocket extends React.Component {
     message: this.handleMessage,
   };
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
-      <Centrifuge secret={connectData.secret} url={connectData.url} user={this.props.user}>
+      <Centrifuge secret={connectData.secret}
+        url={connectData.url}
+        user={this.props.user}
+      >
         <Map>
           <TileLayer {...tileLayerData.Stamen} />
           <View view={geoJSONList} />

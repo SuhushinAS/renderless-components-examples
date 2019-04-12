@@ -9,10 +9,6 @@ class View extends React.Component {
     return L.geoJSON(view).getBounds();
   }
 
-  /**
-   * Обработать смену положения карты
-   * @return {undefined}
-   */
   handleViewChange = () => {
     const {leaflet, onViewChange} = this.props;
 
@@ -24,30 +20,15 @@ class View extends React.Component {
     }
   };
 
-  /**
-   * Отображение компонента
-   * @return {*} Представление компонента.
-   */
   render() {
     return null;
   }
 
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
-   */
   componentDidMount() {
     this.fly();
     this.props.leaflet.on('moveend zoomend', this.handleViewChange);
   }
 
-  /**
-   * Перейти к виду
-   * @return {undefined}
-   */
   fly() {
     const {leaflet, view} = this.props;
     const bounds = View.getBounds(view);
@@ -58,13 +39,6 @@ class View extends React.Component {
     }
   }
 
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render'а компонента.
-   * @param {*} props - Предыдущие свойства.
-   // * @param {*} state - Предыдущее состояние.
-   * @return {undefined}
-   */
   componentDidUpdate(props) {
     const {isLoad, view} = this.props;
 
@@ -82,10 +56,6 @@ class View extends React.Component {
     }
   }
 
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
   componentWillUnmount() {
     this.props.leaflet.off('moveend zoomend', this.handleViewChange);
   }

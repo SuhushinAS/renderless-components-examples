@@ -33,10 +33,6 @@ class Centrifuge extends React.Component {
     return shaObj.getHMAC("HEX");
   }
 
-  /**
-   * Отображение компонента
-   * @return {*} Представление компонента.
-   */
   render() {
     return (
       <SocketContext.Provider value={this.state}>
@@ -45,21 +41,10 @@ class Centrifuge extends React.Component {
     );
   }
 
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
-   */
   componentDidMount() {
     this.connect();
   }
 
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
   componentWillUnmount() {
     this.disconnect();
   }

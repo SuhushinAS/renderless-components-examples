@@ -9,26 +9,18 @@ class Map extends React.PureComponent {
     leaflet: undefined,
   };
 
+  constructor(props) {
+    super(props);
+    this.map = React.createRef();
+  }
+
   handleLoad = () => {
     this.setState({isLoad: true});
   };
 
-  /**
-   * Получить ref.
-   * @param {*} map ref.
-   * @return {undefined}
-   */
-  refMap = (map) => {
-    this.map = map;
-  };
-
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
-      <div className="map" ref={this.refMap}>
+      <div className="map" ref={this.map}>
         <MapContext.Provider value={this.state}>
           {this.state.leaflet && this.props.children}
         </MapContext.Provider>
@@ -36,23 +28,12 @@ class Map extends React.PureComponent {
     );
   }
 
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
-   */
   componentDidMount() {
-    const leaflet = L.map(this.map);
+    const leaflet = L.map(this.map.current);
     this.setState({leaflet});
     window.addEventListener('load', this.handleLoad);
   }
 
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
-   */
   componentWillUnmount() {
     this.state.leaflet.remove();
     this.setState({leaflet: undefined});

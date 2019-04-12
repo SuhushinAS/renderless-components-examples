@@ -10,26 +10,6 @@ class ExampleKey extends React.Component {
     keys: {},
   };
 
-  handleKey = (e) => {
-    this.setState((state) => ({
-      ...state,
-      keys: {
-        ...state.keys,
-        [e.keyCode]: true,
-      },
-    }));
-    setTimeout(this.clearKeyEvents);
-  };
-
-  clearKeyEvents = () => {
-    this.setState({keys: {}})
-  };
-
-  /**
-   * Конструктор компонента.
-   * @param {*} props Свойства переданые в компонент.
-   * @return {undefined}
-   */
   constructor(props) {
     super(props);
     this.keyList = {
@@ -54,10 +34,21 @@ class ExampleKey extends React.Component {
     };
   }
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
+  handleKey = (e) => {
+    this.setState((state) => ({
+      ...state,
+      keys: {
+        ...state.keys,
+        [e.keyCode]: true,
+      },
+    }));
+    setTimeout(this.clearKeyEvents);
+  };
+
+  clearKeyEvents = () => {
+    this.setState({keys: {}})
+  };
+
   render() {
     return (
       <div>
@@ -67,7 +58,10 @@ class ExampleKey extends React.Component {
     );
   }
 
-  renderKey = (key) => <Key id={key} isActive={this.state.keys[keys[key]]} key={key} />;
+  renderKey = (key) => <Key id={key}
+    isActive={this.state.keys[keys[key]]}
+    key={key}
+  />;
 }
 
 export default ExampleKey;

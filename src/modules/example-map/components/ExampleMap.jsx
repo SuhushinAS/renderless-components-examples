@@ -19,10 +19,6 @@ class ExampleMap extends React.Component {
     view: {},
   };
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
       <Layout main={this.renderMain()} side={this.renderSide()} />
@@ -30,10 +26,13 @@ class ExampleMap extends React.Component {
   }
 
   renderMain() {
-    const geoJSONList = geoJSONIdList.filter(this.filterGeoJSON).map(this.getGeoJSON);
+    const geoJSONList = geoJSONIdList
+      .filter(this.filterGeoJSON)
+      .map(this.getGeoJSON);
+    const tileLayer = tileLayerData[this.state.tileLayerId];
     return (
       <Map>
-        <TileLayer {...tileLayerData[this.state.tileLayerId]} />
+        <TileLayer params={tileLayer.params} url={tileLayer.url} />
         <View onViewChange={this.handleViewChange} view={geoJSONList} />
         {geoJSONList.map(this.renderGeoJSON)}
       </Map>
@@ -50,11 +49,12 @@ class ExampleMap extends React.Component {
         <fieldset>
           <legend>View</legend>
           <textarea cols="31"
-                    disabled
-                    id="view"
-                    name="view"
-                    rows="31"
-                    value={JSON.stringify(this.state.view, undefined, 2)} />
+            disabled
+            id="view"
+            name="view"
+            rows="31"
+            value={JSON.stringify(this.state.view, undefined, 2)}
+          />
         </fieldset>
         <fieldset>
           <legend>GeoJSON</legend>
@@ -89,11 +89,19 @@ class ExampleMap extends React.Component {
   renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
 
   renderGeoJSONField = (id) => (
-    <GeoJSONField key={id} onChange={this.handleGeoJSONChange} id={id} value={this.state.showData} />
+    <GeoJSONField key={id}
+      onChange={this.handleGeoJSONChange}
+      id={id}
+      value={this.state.showData}
+    />
   );
 
   renderTileLayerField = (id) => (
-    <TileLayerField key={id} onChange={this.handleTileLayerChange} id={id} value={this.state.tileLayerId} />
+    <TileLayerField key={id}
+      onChange={this.handleTileLayerChange}
+      id={id}
+      value={this.state.tileLayerId}
+    />
   );
 }
 
