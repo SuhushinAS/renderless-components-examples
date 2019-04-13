@@ -1,6 +1,6 @@
 import CentrifugeJS from 'centrifuge';
 import JsSHA from 'jssha';
-import {SocketContext} from "modules/centrifuge/context/SocketContext.js";
+import {SocketContext} from 'modules/centrifuge/context/SocketContext.js';
 import React from 'react';
 
 class Centrifuge extends React.Component {
@@ -27,10 +27,10 @@ class Centrifuge extends React.Component {
 
   static getToken(user, secret, timestamp) {
     const hmacBody = `${user}${timestamp}`;
-    const shaObj = new JsSHA("SHA-256", "TEXT");
-    shaObj.setHMACKey(secret, "TEXT");
+    const shaObj = new JsSHA('SHA-256', 'TEXT');
+    shaObj.setHMACKey(secret, 'TEXT');
     shaObj.update(hmacBody);
-    return shaObj.getHMAC("HEX");
+    return shaObj.getHMAC('HEX');
   }
 
   render() {

@@ -1,12 +1,12 @@
 import history from 'app/history.js';
-import If from "modules/common/components/If.jsx";
-import KeyHandler from "modules/common/components/KeyHandler.jsx";
+import If from 'modules/common/components/If.jsx';
+import KeyHandler from 'modules/common/components/KeyHandler.jsx';
 import ExampleMap from 'modules/example-map/components/ExampleMap.jsx';
-import ExampleSocket from "modules/example-socket/components/ExampleSocket.jsx";
+import ExampleSocket from 'modules/example-socket/components/ExampleSocket.jsx';
 import SocketGenerator
-  from "modules/example-socket/components/SocketGenerator.jsx";
+  from 'modules/example-socket/components/SocketGenerator.jsx';
 import React from 'react';
-import {Redirect, Route, Switch} from "react-router";
+import {Redirect, Route, Switch} from 'react-router';
 import {Link, Router} from 'react-router-dom';
 import './style.css';
 
@@ -37,7 +37,7 @@ class App extends React.Component {
 
   handleKey = (e) => {
     if (e.altKey) {
-      this.setState(this.toggleNav)
+      this.setState(this.toggleNav);
     }
   };
 
@@ -58,7 +58,7 @@ class App extends React.Component {
         <div className="app">
           <If condition={this.state.showNav}>
             <div className="app__nav">
-                {routeList.map(this.renderLink)}
+              {routeList.map(this.renderLink)}
             </div>
           </If>
           <div className="app__content">
@@ -71,10 +71,6 @@ class App extends React.Component {
         </div>
       </Router>
     );
-  }
-
-  renderNav() {
-    return null;
   }
 
   renderLink = (routeId) => <Link

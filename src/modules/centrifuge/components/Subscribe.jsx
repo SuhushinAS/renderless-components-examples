@@ -1,4 +1,4 @@
-import withSocket from "modules/centrifuge/hoc/withSocket.jsx";
+import withSocket from 'modules/centrifuge/hoc/withSocket.jsx';
 import React from 'react';
 
 class Subscribe extends React.Component {

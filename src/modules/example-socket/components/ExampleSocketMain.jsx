@@ -1,9 +1,9 @@
-import Centrifuge from "modules/centrifuge/components/Centrifuge.jsx";
+import Centrifuge from 'modules/centrifuge/components/Centrifuge.jsx';
 import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
-import Map from "modules/map/components/Map.jsx";
-import Marker from "modules/map/components/Marker.jsx";
-import TileLayer from "modules/map/components/TileLayer.jsx";
-import View from "modules/map/components/View.jsx";
+import Map from 'modules/map/components/Map.jsx';
+import Marker from 'modules/map/components/Marker.jsx';
+import TileLayer from 'modules/map/components/TileLayer.jsx';
+import View from 'modules/map/components/View.jsx';
 import React from 'react';
 
 class ExampleSocketMain extends React.Component {
@@ -16,7 +16,7 @@ class ExampleSocketMain extends React.Component {
   };
 
   render() {
-    const {connectData, geoJSONList, tileLayer} = this.props;
+    const {connectData, tileLayer} = this.props;
     return (
       <Centrifuge
         secret={connectData.secret}

@@ -1,4 +1,4 @@
-import GeoJSONField from "modules/example-map/components/GeoJSONField.jsx";
+import GeoJSONField from 'modules/example-map/components/GeoJSONField.jsx';
 import TileLayerField from 'modules/example-map/components/TileLayerField.jsx';
 import React from 'react';
 

@@ -1,6 +1,6 @@
-import Centrifuge from "modules/centrifuge/components/Centrifuge.jsx";
-import Subscribe from "modules/centrifuge/components/Subscribe.jsx";
-import geoJSONData from "modules/example-map/data/geo-json.json";
+import Centrifuge from 'modules/centrifuge/components/Centrifuge.jsx';
+import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
+import geoJSONData from 'modules/example-map/data/geo-json.json';
 import connectData from 'modules/example-socket/data/connect.json';
 import React from 'react';
 
@@ -20,7 +20,7 @@ class SocketGenerator extends React.Component {
     super(props);
     this.coordinates = geoJSONData.Path.coordinates;
     this.eventData = {
-      subscribe: this.handleSubscribe
+      subscribe: this.handleSubscribe,
     };
     this.length = this.coordinates.length;
     this.position = 0;

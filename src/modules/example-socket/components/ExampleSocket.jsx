@@ -1,9 +1,9 @@
 import geoJSONData from 'modules/example-map/data/geo-json.json';
-import tileLayerData from "modules/example-map/data/tile-layer.json";
+import tileLayerData from 'modules/example-map/data/tile-layer.json';
 import ExampleSocketMain
-  from "modules/example-socket/components/ExampleSocketMain.jsx";
+  from 'modules/example-socket/components/ExampleSocketMain.jsx';
 import connectData from 'modules/example-socket/data/connect.json';
-import Marker from "modules/map/components/Marker.jsx";
+import Marker from 'modules/map/components/Marker.jsx';
 import React from 'react';
 
 const geoJSONList = Object.keys(geoJSONData).map((id) => geoJSONData[id]);

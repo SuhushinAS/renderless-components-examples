@@ -1,5 +1,5 @@
 import GeoJSON from 'modules/map/components/GeoJSON.jsx';
-import Map from "modules/map/components/Map.jsx";
+import Map from 'modules/map/components/Map.jsx';
 import TileLayer from 'modules/map/components/TileLayer.jsx';
 import View from 'modules/map/components/View.jsx';
 import React from 'react';

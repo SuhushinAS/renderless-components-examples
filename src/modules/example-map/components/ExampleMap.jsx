@@ -1,6 +1,6 @@
 import Layout from 'modules/common/components/Layout.jsx';
-import ExampleMapMain from "modules/example-map/components/ExampleMapMain.jsx";
-import ExampleMapSide from "modules/example-map/components/ExampleMapSide.jsx";
+import ExampleMapMain from 'modules/example-map/components/ExampleMapMain.jsx';
+import ExampleMapSide from 'modules/example-map/components/ExampleMapSide.jsx';
 import geoJSONData from 'modules/example-map/data/geo-json.json';
 import tileLayerData from 'modules/example-map/data/tile-layer.json';
 import React from 'react';
@@ -23,8 +23,8 @@ class ExampleMap extends React.Component {
 
   renderMain() {
     const geoJSONList = geoJSONIdList
-      .filter(this.filterGeoJSON)
-      .map(this.getGeoJSON);
+    .filter(this.filterGeoJSON)
+    .map(this.getGeoJSON);
     return (
       <ExampleMapMain
         geoJSONList={geoJSONList}

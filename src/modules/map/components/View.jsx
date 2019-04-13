@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import withMap from "modules/map/hoc/withMap.jsx";
+import withMap from 'modules/map/hoc/withMap.jsx';
 import React from 'react';
 
 class View extends React.Component {
