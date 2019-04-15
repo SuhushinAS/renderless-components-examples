@@ -14,21 +14,11 @@ L.Icon.Default.mergeOptions({
 
 class Marker extends React.PureComponent {
   componentDidMount() {
-    const {point} = this.props;
-    if (point) {
-      this.layerAdd(point);
-    }
+    this.layerAdd(this.props.point);
   }
 
   componentDidUpdate() {
-    const {point} = this.props;
-    if (point) {
-      if (this.layer) {
-        this.layerUpdate(point);
-      } else {
-        this.layerAdd(point);
-      }
-    }
+    this.layerUpdate(this.props.point);
   }
 
   componentWillUnmount() {
@@ -36,17 +26,26 @@ class Marker extends React.PureComponent {
   }
 
   layerAdd(point) {
-    const {leaflet} = this.props;
-    this.layer = L.marker(L.GeoJSON.coordsToLatLng(point));
-    leaflet.addLayer(this.layer);
+    if (point) {
+      this.layer = L.marker(L.GeoJSON.coordsToLatLng(point));
+      this.props.leaflet.addLayer(this.layer);
+    }
   }
 
   layerUpdate(point) {
-    this.layer.setLatLng(L.GeoJSON.coordsToLatLng(point));
+    if (point) {
+      if (this.layer) {
+        this.layer.setLatLng(L.GeoJSON.coordsToLatLng(point));
+      } else {
+        this.layerAdd(point);
+      }
+    }
   }
 
   layerDelete() {
-    this.props.leaflet.removeLayer(this.layer);
+    if (this.layer) {
+      this.props.leaflet.removeLayer(this.layer);
+    }
   }
 
   render() {
