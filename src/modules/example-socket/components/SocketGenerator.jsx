@@ -6,12 +6,13 @@ import React from 'react';
 
 class SocketGenerator extends React.Component {
   static defaultProps = {
-    interval: 150,
+    interval: 550,
     user: 'user',
   };
 
   state = {
     position: 0,
+    isFollowPoint: false,
   };
 
   subscription;
@@ -48,6 +49,24 @@ class SocketGenerator extends React.Component {
     this.subscription = subscription;
   };
 
+  handleToggleView = () => {
+    this.setState(this.toggleView);
+  };
+
+  toggleView = (state) => {
+    const isFollowPoint = !state.isFollowPoint;
+    if (this.subscription) {
+      this.subscription.publish({
+        type: 'setView',
+        isFollowPoint,
+      });
+    }
+    return {
+      ...state,
+      isFollowPoint,
+    }
+  };
+
   setPosition = (state) => ({
     ...state,
     position: state.position + 1,
@@ -63,6 +82,8 @@ class SocketGenerator extends React.Component {
           <button onClick={this.handlePause}>Pause</button>
           {' '}
           <button onClick={this.handleStop}>Stop</button>
+          {' '}
+          <button onClick={this.handleToggleView}>Toggle View</button>
         </fieldset>
         <fieldset>
           <legend>Current</legend>
@@ -93,7 +114,10 @@ class SocketGenerator extends React.Component {
   process(position) {
     if (this.subscription) {
       const point = this.coordinates[position];
-      this.subscription.publish(point);
+      this.subscription.publish({
+        type: 'setPoint',
+        point,
+      });
     }
   }
 }

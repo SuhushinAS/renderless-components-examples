@@ -35,15 +35,13 @@ class App extends React.Component {
     showNav: false,
   };
 
-  handleKey = (e) => {
-    if (e.altKey) {
-      this.setState(this.toggleNav);
-    }
-  };
-
   keyList = {
     keydown: {
-      78: this.handleKey,
+      78: (e) => {
+        if (e.altKey) {
+          this.setState(this.toggleNav);
+        }
+      },
     },
   };
 
