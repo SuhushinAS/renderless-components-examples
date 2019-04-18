@@ -1,7 +1,5 @@
 import Centrifuge from 'modules/centrifuge/components/Centrifuge.jsx';
 import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
-import KeyHandler from "modules/common/components/KeyHandler.jsx";
-import geoJSONData from "modules/example-map/data/geo-json.json";
 import Map from 'modules/map/components/Map.jsx';
 import Marker from 'modules/map/components/Marker.jsx';
 import TileLayer from 'modules/map/components/TileLayer.jsx';
