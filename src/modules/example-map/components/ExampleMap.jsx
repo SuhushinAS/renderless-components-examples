@@ -29,7 +29,10 @@ class ExampleMap extends React.Component {
       <ExampleMapMain
         geoJSONList={geoJSONList}
         onViewChange={this.handleViewChange}
-        tileLayer={tileLayerData[this.state.tileLayerId]}
+        tileLayer={{
+          params: tileLayerData[this.state.tileLayerId].params,
+          url: tileLayerData[this.state.tileLayerId].url,
+        }}
       />
     );
   }
