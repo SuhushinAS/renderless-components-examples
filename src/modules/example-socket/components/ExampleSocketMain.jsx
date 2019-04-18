@@ -13,26 +13,6 @@ class ExampleSocketMain extends React.Component {
     isFollowPoint: false,
   };
 
-  eventData = {
-    message: (message) => {
-      switch (message.data.type) {
-        case 'setPoint':
-          this.setState({point: message.data.point});
-          break;
-        case 'setView':
-          this.setState(this.toggleViewType);
-          break;
-        default:
-          break;
-      }
-    },
-  };
-
-  toggleViewType = (state) => ({
-    ...state,
-    isFollowPoint: !state.isFollowPoint,
-  });
-
   get geoJSON() {
     const {point} = this.state
     if (point) {
@@ -44,8 +24,27 @@ class ExampleSocketMain extends React.Component {
     return undefined;
   }
 
+  eventData = {
+    message: (message) => {
+      switch (message.data.type) {
+        case 'setPoint':
+          this.setState({point: message.data.point});
+          break;
+        case 'setView':
+          this.setState((state) => ({
+            ...state,
+            isFollowPoint: !state.isFollowPoint,
+          }));
+          break;
+        default:
+          break;
+      }
+    },
+  };
+
   render() {
-    const {connectData, tileLayer} = this.props;
+    const {connectData, geoJSONData, tileLayer} = this.props;
+    const {isFollowPoint} = this.state;
     return (
       <Centrifuge
         secret={connectData.secret}
@@ -54,7 +53,7 @@ class ExampleSocketMain extends React.Component {
       >
         <Map>
           <TileLayer params={tileLayer.params} url={tileLayer.url} />
-          <View view={this.state.isFollowPoint ? this.geoJSON : this.props.geoJSONData.Path} />
+          <View view={isFollowPoint ? this.geoJSON : geoJSONData.Path} />
           {this.renderPoint()}
         </Map>
         <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
