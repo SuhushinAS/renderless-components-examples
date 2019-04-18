@@ -8,7 +8,7 @@ class GeoJSON extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.layerAdd(this.props);
+    this.layerAdd();
   }
 
   componentDidUpdate() {
