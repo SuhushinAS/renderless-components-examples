@@ -13,8 +13,8 @@ class View extends React.Component {
     const {leaflet, onViewChange} = this.props;
 
     if (onViewChange) {
-      const bounds = leaflet.getBounds();
-      const rectangle = L.rectangle(bounds);
+      this.bounds = leaflet.getBounds();
+      const rectangle = L.rectangle(this.bounds);
       const view = rectangle.toGeoJSON();
       onViewChange(view);
     }
@@ -25,11 +25,11 @@ class View extends React.Component {
   }
 
   componentDidMount() {
-    this.fly();
+    this.setView();
     this.props.leaflet.on('moveend zoomend', this.handleViewChange);
   }
 
-  fly() {
+  setView() {
     const {leaflet, view} = this.props;
     const bounds = View.getBounds(view);
     if (bounds.isValid()) {
@@ -45,14 +45,13 @@ class View extends React.Component {
 
     if (!props.isLoad && isLoad) {
       this.props.leaflet.invalidateSize();
-      this.fly();
+      this.setView();
     }
 
     if (view !== props.view) {
       const bounds = View.getBounds(view);
       if (bounds.isValid() && !bounds.equals(this.bounds)) {
-        this.bounds = bounds;
-        this.fly();
+        this.setView();
       }
     }
   }

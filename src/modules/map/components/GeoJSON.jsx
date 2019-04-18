@@ -11,23 +11,23 @@ class GeoJSON extends React.PureComponent {
     this.layerAdd(this.props);
   }
 
-  componentDidUpdate(props) {
-    this.layerDelete(props);
-    this.layerAdd(this.props);
+  componentDidUpdate() {
+    this.layerDelete();
+    this.layerAdd();
   }
 
   componentWillUnmount() {
-    this.layerDelete(this.props);
+    this.layerDelete();
   }
 
-  layerAdd(props) {
-    const {geoJSON, leaflet} = props;
+  layerAdd() {
+    const {geoJSON, leaflet} = this.props;
     this.layer = L.GeoJSON.geometryToLayer(geoJSON);
     leaflet.addLayer(this.layer);
   }
 
-  layerDelete(props) {
-    props.leaflet.removeLayer(this.layer);
+  layerDelete() {
+    this.props.leaflet.removeLayer(this.layer);
   }
 }
 

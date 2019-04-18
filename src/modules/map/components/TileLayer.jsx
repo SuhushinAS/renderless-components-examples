@@ -11,7 +11,7 @@ class TileLayer extends React.PureComponent {
     this.layerAdd();
   }
 
-  componentDidUpdate(props) {
+  componentDidUpdate() {
     this.layerDelete();
     this.layerAdd();
   }
