@@ -44,7 +44,7 @@ class ExampleSocketMain extends React.Component {
 
   render() {
     const {connectData, geoJSONData, tileLayer} = this.props;
-    const {isFollowPoint} = this.state;
+    const {isFollowPoint, point} = this.state;
     return (
       <Centrifuge
         secret={connectData.secret}
@@ -54,15 +54,11 @@ class ExampleSocketMain extends React.Component {
         <Map>
           <TileLayer params={tileLayer.params} url={tileLayer.url} />
           <View view={isFollowPoint ? this.geoJSON : geoJSONData.Path} />
-          {this.renderPoint()}
+          <Marker point={this.state.point} />
         </Map>
         <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
       </Centrifuge>
     );
-  }
-
-  renderPoint() {
-    return <Marker point={this.state.point} />;
   }
 }
 
