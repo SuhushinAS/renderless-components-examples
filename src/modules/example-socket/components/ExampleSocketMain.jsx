@@ -52,7 +52,7 @@ class ExampleSocketMain extends React.Component {
         <Map>
           <TileLayer params={tileLayer.params} url={tileLayer.url} />
           <View view={isFollowPoint ? this.geoJSON : geoJSONData.Path} />
-          <Marker point={this.state.point} />
+          <Marker point={point} />
         </Map>
         <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
       </Centrifuge>

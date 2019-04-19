@@ -9,7 +9,11 @@ class ExampleSocket extends React.Component {
   render() {
     return (
       <ExampleSocketMain
-        connectData={connectData}
+        connectData={{
+          secret: connectData.secret,
+          url: connectData.url,
+          user: connectData.user,
+        }}
         geoJSONData={geoJSONData}
         tileLayer={tileLayerData.Stamen}
       />
