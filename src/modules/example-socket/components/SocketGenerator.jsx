@@ -87,10 +87,7 @@ class SocketGenerator extends React.Component {
         </fieldset>
         <fieldset>
           <legend>Current</legend>
-          <textarea
-            disabled
-            value={JSON.stringify(this.coordinates[this.state.position])}
-          />
+          <code>{JSON.stringify(this.coordinates[this.state.position])}</code>
         </fieldset>
         <Centrifuge
           secret={connectData.secret}

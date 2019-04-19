@@ -13,14 +13,9 @@ class ExampleMapSide extends React.Component {
         </fieldset>
         <fieldset>
           <legend>View</legend>
-          <textarea
-            cols="31"
-            disabled
-            id="view"
-            name="view"
-            rows="31"
-            value={JSON.stringify(view, undefined, 2)}
-          />
+          <code>
+            {JSON.stringify(view.geometry, undefined, 1)}
+          </code>
         </fieldset>
         <fieldset>
           <legend>GeoJSON</legend>

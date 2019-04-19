@@ -13,8 +13,8 @@ class View extends React.Component {
     const {leaflet, onViewChange} = this.props;
 
     if (onViewChange) {
-      this.bounds = leaflet.getBounds();
-      const rectangle = L.rectangle(this.bounds);
+      const bounds = leaflet.getBounds();
+      const rectangle = L.rectangle(bounds);
       const view = rectangle.toGeoJSON();
       onViewChange(view);
     }
@@ -37,7 +37,7 @@ class View extends React.Component {
     } else {
       leaflet.fitWorld({padding: [0, 0]});
     }
-    this.handleViewChange();
+    this.handleViewChange()
   }
 
   componentDidUpdate(props) {
@@ -51,6 +51,7 @@ class View extends React.Component {
     if (view !== props.view) {
       const bounds = View.getBounds(view);
       if (bounds.isValid() && !bounds.equals(this.bounds)) {
+        this.bounds = bounds;
         this.setView();
       }
     }
