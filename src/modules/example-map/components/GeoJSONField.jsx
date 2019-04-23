@@ -11,7 +11,7 @@ class GeoJSONField extends React.Component {
   render() {
     const {id, value} = this.props;
     return (
-      <label className="geo-json" htmlFor={id}>
+      <div className="geo-json">
         <input
           id={id}
           name="tile"
@@ -19,8 +19,8 @@ class GeoJSONField extends React.Component {
           defaultChecked={value[id]}
           type="checkbox"
         />
-        {id}
-      </label>
+        <label htmlFor={id}>{id}</label>
+      </div>
     );
   }
 

@@ -12,14 +12,14 @@ class ExampleMapSide extends React.Component {
           {tileLayerIdList.map(this.renderTileLayerField)}
         </fieldset>
         <fieldset>
-          <legend>View</legend>
-          <code>
-            {JSON.stringify(view.geometry, undefined, 1)}
-          </code>
-        </fieldset>
-        <fieldset>
           <legend>GeoJSON</legend>
           {geoJSONIdList.map(this.renderGeoJSONField)}
+        </fieldset>
+        <fieldset>
+          <legend>View</legend>
+          <code>
+            {JSON.stringify(view.geometry, undefined, 2)}
+          </code>
         </fieldset>
       </React.Fragment>
     );

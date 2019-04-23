@@ -49,7 +49,7 @@ class SocketGenerator extends React.Component {
     this.subscription = subscription;
   };
 
-  handleToggleView = () => {
+  handleView = () => {
     this.setState(this.toggleView);
   };
 
@@ -83,7 +83,7 @@ class SocketGenerator extends React.Component {
           {' '}
           <button onClick={this.handleStop}>Stop</button>
           {' '}
-          <button onClick={this.handleToggleView}>Toggle View</button>
+          <button onClick={this.handleView}>View</button>
         </fieldset>
         <fieldset>
           <legend>Current</legend>
