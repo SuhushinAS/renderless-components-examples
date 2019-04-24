@@ -6,29 +6,17 @@ import React from 'react';
 
 class ExampleMapMain extends React.Component {
   render() {
-    const {
-      geoJSONList,
-      onViewChange,
-      tile
-    } = this.props;
+    const {geoJSONList, onViewChange, tile} = this.props;
     return (
       <Map>
-        <TileLayer
-          params={tile.params}
-          url={tile.url}
-        />
-        <View
-          onViewChange={onViewChange}
-          view={geoJSONList}
-        />
+        <TileLayer params={tile.params} url={tile.url} />
+        <View onViewChange={onViewChange} view={geoJSONList} />
         {geoJSONList.map(this.renderGeoJSON)}
       </Map>
     );
   }
 
-  renderGeoJSON = (geoJSON, id) => (
-    <GeoJSON geoJSON={geoJSON} key={id} />
-  );
+  renderGeoJSON = (geoJSON, id) => <GeoJSON geoJSON={geoJSON} key={id} />;
 }
 
 export default ExampleMapMain;
