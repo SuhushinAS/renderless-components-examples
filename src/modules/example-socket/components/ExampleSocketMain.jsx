@@ -8,7 +8,7 @@ import React from 'react';
 
 class ExampleSocketMain extends React.Component {
   state = {
-    isFollowPoint: false,
+    isFollow: false,
   };
 
   get geoJSON() {
@@ -31,7 +31,7 @@ class ExampleSocketMain extends React.Component {
         case 'setView':
           this.setState((state) => ({
             ...state,
-            isFollowPoint: !state.isFollowPoint,
+            isFollow: !state.isFollow,
           }));
           break;
         default:
@@ -41,8 +41,8 @@ class ExampleSocketMain extends React.Component {
   };
 
   render() {
-    const {connectData, geoJSONData, tileLayer} = this.props;
-    const {isFollowPoint, point} = this.state;
+    const {connectData, geoJSON, tileLayer} = this.props;
+    const {isFollow, point} = this.state;
     return (
       <Centrifuge
         secret={connectData.secret}
@@ -51,7 +51,7 @@ class ExampleSocketMain extends React.Component {
       >
         <Map>
           <TileLayer params={tileLayer.params} url={tileLayer.url} />
-          <View view={isFollowPoint ? this.geoJSON : geoJSONData.Path} />
+          <View view={isFollow ? this.geoJSON : geoJSON.Path} />
           <Marker point={point} />
         </Map>
         <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
