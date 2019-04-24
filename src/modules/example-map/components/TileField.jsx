@@ -1,7 +1,7 @@
-import 'modules/example-map/components/TileLayerField.css';
+import 'modules/example-map/components/TileField.css';
 import React from 'react';
 
-class TileLayerField extends React.Component {
+class TileField extends React.Component {
   static defaultProps = {
     onChange: () => {
     },
@@ -28,4 +28,4 @@ class TileLayerField extends React.Component {
   };
 }
 
-export default TileLayerField;
+export default TileField;

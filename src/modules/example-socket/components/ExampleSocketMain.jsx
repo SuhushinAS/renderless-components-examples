@@ -11,17 +11,6 @@ class ExampleSocketMain extends React.Component {
     isFollow: false,
   };
 
-  get geoJSON() {
-    const {point} = this.state
-    if (point) {
-      return {
-        coordinates: point,
-        type: 'Point',
-      };
-    }
-    return undefined;
-  }
-
   eventData = {
     message: (message) => {
       switch (message.data.type) {
@@ -40,21 +29,32 @@ class ExampleSocketMain extends React.Component {
     },
   };
 
+  get geoJSON() {
+    const {point} = this.state
+    if (point) {
+      return {
+        coordinates: point,
+        type: 'Point',
+      };
+    }
+    return undefined;
+  }
+
   render() {
-    const {connectData, geoJSON, tileLayer} = this.props;
+    const {connect, geoJSON, tile} = this.props;
     const {isFollow, point} = this.state;
+    const view = isFollow ? this.geoJSON : geoJSON.Path;
     return (
-      <Centrifuge
-        secret={connectData.secret}
-        url={connectData.url}
-        user={connectData.user}
-      >
+      <Centrifuge {...connect}>
         <Map>
-          <TileLayer params={tileLayer.params} url={tileLayer.url} />
-          <View view={isFollow ? this.geoJSON : geoJSON.Path} />
+          <TileLayer {...tile} />
+          <View view={view} />
           <Marker point={point} />
         </Map>
-        <Subscribe channel="userstory-at-devpro" eventData={this.eventData} />
+        <Subscribe
+          channel="userstory-at-devpro"
+          eventData={this.eventData}
+        />
       </Centrifuge>
     );
   }

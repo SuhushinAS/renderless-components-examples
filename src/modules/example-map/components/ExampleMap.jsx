@@ -1,35 +1,40 @@
 import Layout from 'modules/common/components/Layout.jsx';
-import ExampleMapMain from 'modules/example-map/components/ExampleMapMain.jsx';
-import ExampleMapSide from 'modules/example-map/components/ExampleMapSide.jsx';
-import geoJSONData from 'modules/example-map/data/geo-json.json';
-import tileLayerData from 'modules/example-map/data/tile-layer.json';
+import ExampleMapMain
+  from 'modules/example-map/components/ExampleMapMain.jsx';
+import ExampleMapSide
+  from 'modules/example-map/components/ExampleMapSide.jsx';
+import geoJSON from 'modules/example-map/data/geo-json.json';
+import tile from 'modules/example-map/data/tile-layer.json';
 import React from 'react';
 
-const geoJSONIdList = Object.keys(geoJSONData);
-const tileLayerIdList = Object.keys(tileLayerData);
+const geoJSONIdList = Object.keys(geoJSON);
+const tileIdList = Object.keys(tile);
 
 class ExampleMap extends React.Component {
   state = {
     showData: {},
-    tileLayerId: tileLayerIdList[0],
+    tileId: tileIdList[0],
     view: {},
   };
 
   render() {
     return (
-      <Layout main={this.renderMain()} side={this.renderSide()} />
+      <Layout
+        main={this.renderMain()}
+        side={this.renderSide()}
+      />
     );
   }
 
   renderMain() {
     const geoJSONList = geoJSONIdList
-    .filter(this.filterGeoJSON)
-    .map(this.getGeoJSON);
+      .filter(this.filterGeoJSON)
+      .map(this.getGeoJSON);
     return (
       <ExampleMapMain
         geoJSONList={geoJSONList}
         onViewChange={this.handleViewChange}
-        tileLayer={tileLayerData[this.state.tileLayerId]}
+        tile={tile[this.state.tileId]}
       />
     );
   }
@@ -38,11 +43,11 @@ class ExampleMap extends React.Component {
     return (
       <ExampleMapSide
         geoJSONIdList={geoJSONIdList}
-        tileLayerIdList={tileLayerIdList}
+        tileIdList={tileIdList}
         onGeoJSONChange={this.handleGeoJSONChange}
-        onTileLayerChange={this.handleTileLayerChange}
+        onTileChange={this.handleTileChange}
         showData={this.state.showData}
-        tileLayerId={this.state.tileLayerId}
+        tileId={this.state.tileId}
         view={this.state.view}
       />
     );
@@ -50,7 +55,7 @@ class ExampleMap extends React.Component {
 
   filterGeoJSON = (id) => this.state.showData[id];
 
-  getGeoJSON = (id) => geoJSONData[id];
+  getGeoJSON = (id) => geoJSON[id];
 
   handleGeoJSONChange = (id) => {
     this.setState((state) => ({
@@ -62,8 +67,8 @@ class ExampleMap extends React.Component {
     }));
   };
 
-  handleTileLayerChange = (tileLayerId) => {
-    this.setState({tileLayerId});
+  handleTileChange = (tileId) => {
+    this.setState({tileId});
   };
 
   handleViewChange = (view) => {

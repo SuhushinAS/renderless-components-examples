@@ -2,7 +2,8 @@ import history from 'app/history.js';
 import If from 'modules/common/components/If.jsx';
 import KeyHandler from 'modules/common/components/KeyHandler.jsx';
 import ExampleMap from 'modules/example-map/components/ExampleMap.jsx';
-import ExampleSocket from 'modules/example-socket/components/ExampleSocket.jsx';
+import ExampleSocket
+  from 'modules/example-socket/components/ExampleSocket.jsx';
 import SocketGenerator
   from 'modules/example-socket/components/SocketGenerator.jsx';
 import React from 'react';
@@ -35,6 +36,11 @@ class App extends React.Component {
     showNav: false,
   };
 
+  toggleNav = (state) => ({
+    ...state,
+    showNav: !state.showNav,
+  });
+
   keyList = {
     keydown: {
       78: (e) => {
@@ -44,11 +50,6 @@ class App extends React.Component {
       },
     },
   };
-
-  toggleNav = (state) => ({
-    ...state,
-    showNav: !state.showNav,
-  });
 
   render() {
     return (

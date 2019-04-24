@@ -1,15 +1,17 @@
-import GeoJSONField from 'modules/example-map/components/GeoJSONField.jsx';
-import TileLayerField from 'modules/example-map/components/TileLayerField.jsx';
+import GeoJSONField
+  from 'modules/example-map/components/GeoJSONField.jsx';
+import TileField
+  from 'modules/example-map/components/TileField.jsx';
 import React from 'react';
 
 class ExampleMapSide extends React.Component {
   render() {
-    const {geoJSONIdList, tileLayerIdList, view} = this.props;
+    const {geoJSONIdList, tileIdList, view} = this.props;
     return (
       <React.Fragment>
         <fieldset>
           <legend>Tile layer</legend>
-          {tileLayerIdList.map(this.renderTileLayerField)}
+          {tileIdList.map(this.renderTileField)}
         </fieldset>
         <fieldset>
           <legend>GeoJSON</legend>
@@ -34,12 +36,12 @@ class ExampleMapSide extends React.Component {
     />
   );
 
-  renderTileLayerField = (id) => (
-    <TileLayerField
+  renderTileField = (id) => (
+    <TileField
       key={id}
-      onChange={this.props.onTileLayerChange}
+      onChange={this.props.onTileChange}
       id={id}
-      value={this.props.tileLayerId}
+      value={this.props.tileId}
     />
   );
 }
