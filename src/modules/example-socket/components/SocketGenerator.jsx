@@ -95,7 +95,7 @@ class SocketGenerator extends React.Component {
           user={this.props.user}
         >
           <Subscribe
-            channel="userstory-at-devpro"
+            channel="userstory+devpro"
             eventData={this.eventData}
           />
         </Centrifuge>

@@ -47,14 +47,11 @@ class ExampleSocketMain extends React.Component {
     return (
       <Centrifuge {...connect}>
         <Map>
-          <TileLayer {...tile} />
+          <TileLayer params={tile.params} url={tile.url} />
           <View view={view} />
           <Marker point={point} />
         </Map>
-        <Subscribe
-          channel="userstory-at-devpro"
-          eventData={this.eventData}
-        />
+        <Subscribe channel="userstory+devpro" eventData={this.eventData} />
       </Centrifuge>
     );
   }
