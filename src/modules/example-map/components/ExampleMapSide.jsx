@@ -1,7 +1,5 @@
-import GeoJSONField
-  from 'modules/example-map/components/GeoJSONField.jsx';
-import TileField
-  from 'modules/example-map/components/TileField.jsx';
+import GeoJSONField from 'modules/example-map/components/GeoJSONField.jsx';
+import TileField from 'modules/example-map/components/TileField.jsx';
 import React from 'react';
 
 class ExampleMapSide extends React.Component {

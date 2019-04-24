@@ -1,8 +1,6 @@
 import Layout from 'modules/common/components/Layout.jsx';
-import ExampleMapMain
-  from 'modules/example-map/components/ExampleMapMain.jsx';
-import ExampleMapSide
-  from 'modules/example-map/components/ExampleMapSide.jsx';
+import ExampleMapMain from 'modules/example-map/components/ExampleMapMain.jsx';
+import ExampleMapSide from 'modules/example-map/components/ExampleMapSide.jsx';
 import geoJSON from 'modules/example-map/data/geo-json.json';
 import tile from 'modules/example-map/data/tile-layer.json';
 import React from 'react';
