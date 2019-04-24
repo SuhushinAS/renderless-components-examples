@@ -1,6 +1,6 @@
 import CentrifugeJS from 'centrifuge';
 import JsSHA from 'jssha';
-import {SocketContext} from 'modules/centrifuge/context/SocketContext.js';
+import {SocketContext} from 'modules/centrifuge/context/SocketContext.jsx';
 import React from 'react';
 
 class Centrifuge extends React.Component {

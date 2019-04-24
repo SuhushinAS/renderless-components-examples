@@ -1,5 +1,6 @@
-import {MapContext} from 'modules/map/context/MapContext.js';
 import React from 'react';
+
+export const MapContext = React.createContext(undefined);
 
 export default function withMap(Component) {
   return class ComponentWithMap extends React.Component {

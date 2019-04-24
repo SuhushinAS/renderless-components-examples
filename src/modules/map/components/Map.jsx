@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import 'modules/map/components/Map.css';
-import {MapContext} from 'modules/map/context/MapContext.js';
+import {MapContext} from 'modules/map/context/MapContext.jsx';
 import React from 'react';
 
 class Map extends React.PureComponent {

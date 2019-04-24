@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import 'modules/map/components/Marker.css';
-import withMap from 'modules/map/hoc/withMap.jsx';
+import withMap from 'modules/map/context/MapContext.jsx';
 import React from 'react';
 
 // Фикс иконок на картах

@@ -1,5 +1,6 @@
-import {SocketContext} from 'modules/centrifuge/context/SocketContext.js';
 import React from 'react';
+
+export const SocketContext = React.createContext(undefined);
 
 export default function withSocket(Component) {
   return class ComponentWithSocket extends React.Component {
