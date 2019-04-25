@@ -71,17 +71,15 @@ class App extends React.Component {
     );
   }
 
-  renderLink = (routeId) => <Link
-    className="app__nav-link"
-    key={routeId}
-    to={routeData[routeId].path}
-  >{routeData[routeId].name}</Link>;
+  renderLink = (id) => {
+    const {name, path} = routeData[id];
+    return <Link className="app__nav-link" key={id} to={path}>{name}</Link>;
+  };
 
-  renderRoute = (routeId) => <Route
-    component={routeData[routeId].component}
-    key={routeId}
-    path={routeData[routeId].path}
-  />;
+  renderRoute = (id) => {
+    const {component, path} = routeData[id];
+    return <Route component={component} key={id} path={path} />;
+  }
 }
 
 export default App;

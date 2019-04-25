@@ -6,7 +6,7 @@ import TileLayer from 'modules/map/components/TileLayer.jsx';
 import View from 'modules/map/components/View.jsx';
 import React from 'react';
 
-class ExampleSocketMain extends React.Component {
+class ExampleSocketMap extends React.Component {
   state = {
     isFollow: false,
   };
@@ -57,4 +57,4 @@ class ExampleSocketMain extends React.Component {
   }
 }
 
-export default ExampleSocketMain;
+export default ExampleSocketMap;

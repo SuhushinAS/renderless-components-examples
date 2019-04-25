@@ -1,16 +1,18 @@
+import {request} from "app/helpers.js";
 import Centrifuge from 'modules/centrifuge/components/Centrifuge.jsx';
 import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
-import geoJSONData from 'modules/example-map/data/geo-json.json';
-import connectData from 'modules/example-socket/data/connect.json';
 import React from 'react';
 
 class SocketGenerator extends React.Component {
   static defaultProps = {
     interval: 550,
-    user: 'user',
   };
 
   state = {
+    connect: undefined,
+    coordinates: [],
+    geoJSON: undefined,
+    length: 0,
     position: 0,
     isFollowPoint: false,
   };
@@ -19,13 +21,28 @@ class SocketGenerator extends React.Component {
 
   constructor(props) {
     super(props);
-    this.coordinates = geoJSONData.Path.coordinates;
     this.eventData = {
       subscribe: this.handleSubscribe,
     };
-    this.length = this.coordinates.length;
     this.position = 0;
     this.tickBind = this.tick.bind(this);
+    this.load('connect', 'api/v1/connect');
+    this.loadGeoJSON();
+  }
+
+  async load(key, url) {
+    const data = await request(url);
+    this.setState({[key]: data});
+    return data;
+  }
+
+  async loadGeoJSON() {
+    const geoJSON = await this.load('geoJSON', 'api/v1/geo-json');
+    const {coordinates} = geoJSON.Path;
+    this.setState({
+      coordinates,
+      length: coordinates.length,
+    });
   }
 
   handlePause = () => {
@@ -73,47 +90,47 @@ class SocketGenerator extends React.Component {
   });
 
   render() {
-    return (
-      <div>
-        <fieldset>
-          <legend>Control</legend>
-          <button onClick={this.handleStart}>Start</button>
-          {' '}
-          <button onClick={this.handlePause}>Pause</button>
-          {' '}
-          <button onClick={this.handleStop}>Stop</button>
-          {' '}
-          <button onClick={this.handleView}>View</button>
-        </fieldset>
-        <fieldset>
-          <legend>Current</legend>
-          <code>{JSON.stringify(this.coordinates[this.state.position])}</code>
-        </fieldset>
-        <Centrifuge
-          secret={connectData.secret}
-          url={connectData.url}
-          user={this.props.user}
-        >
-          <Subscribe
-            channel="userstory+devpro"
-            eventData={this.eventData}
-          />
-        </Centrifuge>
-      </div>
-    );
+    const {connect, coordinates, position} = this.state;
+    if (connect && coordinates) {
+      return (
+        <div>
+          <fieldset>
+            <legend>Control</legend>
+            <button onClick={this.handleStart}>Start</button>
+            {' '}
+            <button onClick={this.handlePause}>Pause</button>
+            {' '}
+            <button onClick={this.handleStop}>Stop</button>
+            {' '}
+            <button onClick={this.handleView}>View</button>
+          </fieldset>
+          <fieldset>
+            <legend>Current</legend>
+            <code>
+              {JSON.stringify(coordinates[position])}
+            </code>
+          </fieldset>
+          <Centrifuge {...connect}>
+            <Subscribe channel="userstory+devpro" eventData={this.eventData} />
+          </Centrifuge>
+        </div>
+      );
+    }
+    return null;
   }
 
   tick() {
-    if (this.state.position < this.length) {
+    const {length, position} = this.state;
+    if (position < length) {
       this.timeout = setTimeout(this.tickBind, this.props.interval);
-      this.process(this.state.position);
+      this.process(position);
       this.setState(this.setPosition);
     }
   }
 
   process(position) {
     if (this.subscription) {
-      const point = this.coordinates[position];
+      const point = this.state.coordinates[position];
       this.subscription.publish({
         type: 'setPoint',
         point,
