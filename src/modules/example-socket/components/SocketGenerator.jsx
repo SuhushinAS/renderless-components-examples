@@ -120,6 +120,10 @@ class SocketGenerator extends React.Component {
       });
     }
   }
+
+  componentWillUnmount() {
+    this.handleStop();
+  }
 }
 
 export default SocketGenerator;
