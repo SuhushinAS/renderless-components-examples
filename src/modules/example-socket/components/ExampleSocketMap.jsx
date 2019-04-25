@@ -30,7 +30,7 @@ class ExampleSocketMap extends React.Component {
   };
 
   get geoJSON() {
-    const {point} = this.state
+    const {point} = this.state;
     if (point) {
       return {
         coordinates: point,

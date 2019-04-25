@@ -37,7 +37,7 @@ class View extends React.Component {
     } else {
       leaflet.fitWorld({padding: [0, 0]});
     }
-    this.handleViewChange()
+    this.handleViewChange();
   }
 
   componentDidUpdate(props) {

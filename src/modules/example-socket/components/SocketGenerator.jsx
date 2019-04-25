@@ -1,8 +1,8 @@
+import connect from 'data/connect.json';
+import geoJSON from 'data/geo-json.json';
 import Centrifuge from 'modules/centrifuge/components/Centrifuge.jsx';
 import Subscribe from 'modules/centrifuge/components/Subscribe.jsx';
 import React from 'react';
-import connect from 'data/connect.json';
-import geoJSON from 'data/geo-json.json';
 
 const {coordinates} = geoJSON.Path;
 const {length} = coordinates;
@@ -64,7 +64,7 @@ class SocketGenerator extends React.Component {
     return {
       ...state,
       isFollowPoint,
-    }
+    };
   };
 
   setPosition = (state) => ({

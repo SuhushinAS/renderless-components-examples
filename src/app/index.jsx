@@ -79,7 +79,7 @@ class App extends React.Component {
   renderRoute = (id) => {
     const {component, path} = routeData[id];
     return <Route component={component} key={id} path={path} />;
-  }
+  };
 }
 
 export default App;
