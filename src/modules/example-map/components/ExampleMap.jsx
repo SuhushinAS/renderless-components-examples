@@ -1,35 +1,22 @@
-import {request} from 'app/helpers.js';
+import geoJSON from 'data/geo-json.json';
+import tile from 'data/tile.json';
 import Layout from 'modules/common/components/Layout.jsx';
 import ExampleMapMain from 'modules/example-map/components/ExampleMapMain.jsx';
 import ExampleMapSide from 'modules/example-map/components/ExampleMapSide.jsx';
 import React from 'react';
 
+const geoJSONIdList = Object.keys(geoJSON);
+const tileIdList = Object.keys(tile);
+
 class ExampleMap extends React.Component {
   state = {
-    geoJSON: undefined,
     showData: {},
-    tile: undefined,
-    tileId: undefined,
+    tileId: tileIdList[0],
     view: {},
   };
 
-  constructor(props) {
-    super(props);
-    this.load('geoJSON', 'api/v1/geo-json');
-    this.loadTile();
-  }
-
-  async loadTile() {
-    const tile = await this.load('tile', 'api/v1/tile');
-    this.setState({
-      tileId: Object.keys(tile)[0],
-    });
-  }
-
-  async load(key, url) {
-    const data = await request(url);
-    this.setState({[key]: data});
-    return data;
+  get geoJSONList() {
+    return geoJSONIdList.filter(this.filterGeoJSON).map(this.getGeoJSON);
   }
 
   render() {
@@ -42,43 +29,34 @@ class ExampleMap extends React.Component {
   }
 
   renderMain() {
-    const {geoJSON, tile, tileId} = this.state;
-    if (geoJSON && tile && tileId) {
-      const geoJSONList = Object.keys(geoJSON)
-        .filter(this.filterGeoJSON)
-        .map(this.getGeoJSON);
-      return (
-        <ExampleMapMain
-          geoJSONList={geoJSONList}
-          onViewChange={this.handleViewChange}
-          tile={tile[tileId]}
-        />
-      );
-    }
-    return null;
+    const {tileId} = this.state;
+    return (
+      <ExampleMapMain
+        geoJSONList={this.geoJSONList}
+        onViewChange={this.handleViewChange}
+        tile={tile[tileId]}
+      />
+    );
   }
 
   renderSide() {
-    const {geoJSON, showData, tile, tileId, view} = this.state;
-    if (geoJSON && tile && tileId) {
-      return (
-        <ExampleMapSide
-          geoJSONIdList={Object.keys(geoJSON)}
-          tileIdList={Object.keys(tile)}
-          onGeoJSONChange={this.handleGeoJSONChange}
-          onTileChange={this.handleTileChange}
-          showData={showData}
-          tileId={tileId}
-          view={view}
-        />
-      );
-    }
-    return null
+    const {showData, tileId, view} = this.state;
+    return (
+      <ExampleMapSide
+        geoJSONIdList={geoJSONIdList}
+        tileIdList={tileIdList}
+        onGeoJSONChange={this.handleGeoJSONChange}
+        onTileChange={this.handleTileChange}
+        showData={showData}
+        tileId={tileId}
+        view={view}
+      />
+    );
   }
 
   filterGeoJSON = (id) => this.state.showData[id];
 
-  getGeoJSON = (id) => this.state.geoJSON[id];
+  getGeoJSON = (id) => geoJSON[id];
 
   handleGeoJSONChange = (id) => {
     this.setState((state) => ({

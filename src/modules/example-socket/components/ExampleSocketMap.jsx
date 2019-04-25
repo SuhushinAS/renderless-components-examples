@@ -51,7 +51,7 @@ class ExampleSocketMap extends React.Component {
           <View view={view} />
           <Marker point={point} />
         </Map>
-        <Subscribe channel="userstory+devpro" eventData={this.eventData} />
+        <Subscribe channel="Userstory+DevPRO" eventData={this.eventData} />
       </Centrifuge>
     );
   }
