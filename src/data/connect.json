@@ -1,5 +1,5 @@
 {
   "secret": "secret",
-  "url": "https://centrifugostock.herokuapp.com",
+  "url": "https://centrifugo.herokuapp.com",
   "user": "user"
 }
