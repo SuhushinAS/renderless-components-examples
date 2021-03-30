@@ -9,7 +9,7 @@ const {length} = coordinates;
 
 class SocketGenerator extends React.Component {
   static defaultProps = {
-    interval: 550,
+    interval: 500,
   };
 
   state = {

@@ -32,7 +32,7 @@ const routeList = Object.keys(routeData);
 
 class App extends React.Component {
   state = {
-    showNav: false,
+    showNav: true,
   };
 
   toggleNav = (state) => ({

@@ -15,7 +15,9 @@
 
 .app__content {
   display: flex;
-  height: 100%;
+  flex-basis: auto;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 fieldset {
